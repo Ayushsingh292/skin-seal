@@ -1,0 +1,16 @@
+# Original company/clinical source material must not be uploaded.
+items/
+.recovery/
+
+# Configure server secrets in Vercel's environment-variable settings.
+.env*
+
+# Local dependencies, generated output and verification artifacts.
+node_modules/
+.next/
+.git/
+.vercel/
+test-results/
+playwright-report/
+coverage/
+*.tsbuildinfo
