@@ -2,110 +2,105 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Play, X, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Play, X, ArrowUpRight, Film } from "lucide-react";
 import { publishedVideos, type ClinicalVideo } from "@/data/media";
-export function VideoGallery() {
+
+export function VideoGallery({ product }: { product?: string }) {
+  const entries = publishedVideos.filter(
+    (v) => !product || v.product === product,
+  );
   const [selected, setSelected] = useState<ClinicalVideo | null>(null);
+  const [failed, setFailed] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
+  const player = useRef<HTMLVideoElement>(null);
   const opener = useRef<HTMLButtonElement | null>(null);
-  function close() {
-    dialog.current?.close();
+  function cleanup() {
+    player.current?.pause();
     setSelected(null);
     opener.current?.focus();
   }
+  function close() {
+    player.current?.pause();
+    dialog.current?.close();
+    cleanup();
+  }
+  if (!entries.length) return null;
   return (
-    <>
-      {publishedVideos.length ? (
-        <div className="video-grid">
-          {publishedVideos.map((v) => (
-            <button
-              key={v.id}
-              className="video-card"
-              onClick={(e) => {
-                opener.current = e.currentTarget;
-                setSelected(v);
-                dialog.current?.showModal();
-              }}
-            >
-              <div className="video-poster">
-                <Image
-                  src={v.poster!}
-                  alt=""
-                  fill
-                  sizes="(max-width:760px) 90vw,50vw"
-                />
-                <span className="play-circle">
-                  <Play fill="currentColor" />
-                </span>
-              </div>
-              <span className="video-category">
-                Product demonstration / {v.product}
-              </span>
-              <h3>{v.title}</h3>
-              <p>{v.description}</p>
-            </button>
-          ))}
+    <div className="company-film-library">
+      <div className="film-intro">
+        <div>
+          <p className="eyebrow">SkinSeal video collection</p>
+          <h2>
+            Meet the range.
+            <br />
+            <span>See the story.</span>
+          </h2>
         </div>
-      ) : (
-        <div className="cinema-request">
-          <div className="cinema-copy">
-            <p className="eyebrow">A closer look</p>
-            <h2>
-              Understand
-              <br />
-              the product.
-              <br />
-              <span>See the detail.</span>
-            </h2>
-            <p>
-              Bring the SkinSeal range into focus. Request a professional
-              demonstration and the relevant learning materials for your chosen
-              formulation.
-            </p>
-            <Link className="button white" href="/contact?type=demonstration">
-              Request a Demonstration <ArrowUpRight size={20} />
-            </Link>
-            <Link className="text-link" href="/clinical-experiences">
-              Clinical experiences & learning <ArrowRight size={18} />
-            </Link>
-          </div>
-          <div className="cinema-product">
-            <div className="cinema-frame-top">
-              <span>SKINSEAL / PRODUCT FOCUS</span>
-              <span>01 — ORIGINAL</span>
-            </div>
-            <div className="cinema-product-image">
+        <p>
+          Get to know SkinSeal through our product videos. Explore the range
+          and find information relevant to your practice.
+        </p>
+      </div>
+      <div
+        className={`video-grid${entries.length === 1 ? " video-grid-single" : ""}`}
+      >
+        {entries.map((v, index) => (
+          <button
+            key={v.id}
+            className={`video-card film-${v.orientation}`}
+            aria-haspopup="dialog"
+            onClick={(e) => {
+              opener.current = e.currentTarget;
+              setFailed(false);
+              setSelected(v);
+              dialog.current?.showModal();
+            }}
+          >
+            <div className="video-poster">
               <Image
-                src="/images/products/original-applicator.webp"
-                alt="Original SkinSeal applicator detail from the supplied company catalogue"
-                width={2419}
-                height={451}
-                sizes="(max-width:760px) 85vw,50vw"
+                src={v.poster!}
+                alt=""
+                fill
+                sizes="(max-width:760px) 90vw, (max-width:1280px) 45vw, 600px"
               />
+              <span className="film-badge">
+                <Film size={14} /> Product video
+              </span>
+              <span className="play-circle">
+                <Play fill="currentColor" aria-hidden="true" />
+              </span>
+              <span className="film-duration">{v.duration}</span>
             </div>
-            <div className="cinema-caption">
-              <span>Original product imagery.</span>
-              <p>
-                No clinical testimonials or patient footage are currently
-                published.
-              </p>
-              <Link
-                href="/contact?type=demonstration"
-                aria-label="Ask about a SkinSeal demonstration"
-              >
-                <ArrowUpRight size={25} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+            <span className="video-category">
+              0{index + 1} / {v.productName}
+            </span>
+            <h3>
+              <span>
+                <span className="sr-only">Watch </span>
+                {v.title}
+              </span>{" "}
+              <ArrowUpRight size={22} />
+            </h3>
+            <p>{v.description}</p>
+          </button>
+        ))}
+      </div>
+      <p className="film-disclosure">
+        Product selection and use require professional assessment and the
+        applicable Instructions for Use.
+      </p>
       <dialog
         ref={dialog}
         className="video-dialog"
         aria-labelledby="video-title"
-        onCancel={close}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) close();
+        aria-describedby="video-disclosure"
+        onClose={cleanup}
+        onCancel={(event) => {
+          event.preventDefault();
+          close();
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) close();
         }}
       >
         <div className="dialog-inner">
@@ -118,22 +113,41 @@ export function VideoGallery() {
           </button>
           {selected && (
             <>
+              <p className="eyebrow">
+                {selected.productName} / Product video
+              </p>
               <h2 id="video-title">{selected.title}</h2>
               <video
+                ref={player}
                 key={selected.id}
                 controls
                 playsInline
                 preload="none"
                 poster={selected.poster}
+                aria-label={selected.title}
+                aria-describedby="video-disclosure"
+                onError={() => setFailed(true)}
               >
                 <source src={selected.src} type="video/mp4" />
                 Your browser does not support embedded video.
               </video>
-              <p>{selected.description}</p>
+              {failed && (
+                <p role="alert">
+                  The film could not load.{" "}
+                  <a href={selected.src}>Open the video directly</a>.
+                </p>
+              )}
+              <p id="video-disclosure">{selected.disclosure}</p>
+              <Link
+                className="text-link"
+                href={`/contact?product=${selected.product}&type=demonstration`}
+              >
+                Ask about this product <ArrowUpRight size={17} />
+              </Link>
             </>
           )}
         </div>
       </dialog>
-    </>
+    </div>
   );
 }

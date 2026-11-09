@@ -239,7 +239,7 @@ export default function Home() {
             </h2>
             <p>
               Find product catalogues, application guides and Instructions for
-              Use. Request current documents from our team.
+              Use. View and download the company-supplied collection.
             </p>
             <Link className="text-link" href="/resources">
               Visit the resource library <ArrowUpRight size={20} />

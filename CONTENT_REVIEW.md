@@ -1,6 +1,6 @@
 # Content review before launch
 
-The website is a local development rebuild. No deployment has been performed. `SITE_APPROVED=false` defaults to noindex and robots disallow. Do not turn it on until the owner approves launch content.
+The website is a local development rebuild. This agent has not deployed it. `SITE_APPROVED=false` defaults to noindex and robots disallow. Do not turn it on until the owner approves launch content.
 
 ## Verified basis
 
@@ -34,7 +34,7 @@ Record reviewer, decision, date, product/variant, rights, consent, source revisi
 
 ## Approval record
 
-No clinical media/document approval records have been supplied. Company packaging and brand artwork are used within the user’s express authorization to preserve and integrate authentic company assets. Everything requiring separate publication authorization remains withheld.
+Superseded on 9 November 2026 for the two videos and seven PDFs: the owner explicitly confirmed rights, consent and clinical approval; see the current approval record below. Standalone patient imagery and third-party press remain excluded. Company packaging and brand artwork are used within the user’s express authorization to preserve and integrate authentic company assets. Everything requiring separate publication authorization remains withheld.
 
 ## Editorial redesign asset decision
 
@@ -43,3 +43,11 @@ Final refinement: publication status is unchanged after a fresh recursive source
 Reinspected all 17 original files and six representative frames from each video. The original catalogue contains a 2419 × 451-pixel authentic SkinSeal applicator image, now extracted and integrated as product artwork. It depicts no person or patient. Both videos still require full medical/rights review; sampled veterinary frames include a Veo watermark and a synthetic-looking presenter, so they must not be described as genuine clinician experiences without verification. No approval has been inferred from permission to inspect source files.
 
 New interactive catalogue and process copy uses the same conservative, previously sourced facts. The professional-learning section is a demonstration request when no approved media exists; it does not display a false play button. The resource library preserves the real seven-document inventory, search, type filters and request context. Approved entries support View/Download, but none is currently approved.
+
+## Current approval record - video/PDF integration, 9 November 2026
+
+**Reviewer:** project owner, in this conversation. **Decision:** "I confirm rights, consent and clinical approval for full files", in response to the question specifically covering full videos, all PDFs, real clinical footage consent and clinical claims. **Scope:** both MP4s and seven PDFs in `items/`. This later explicit authorization supersedes the initial withholding decisions above for those nine files.
+
+Both videos now have public compressed delivery copies, original audio, truthful promotional titles, AI disclosures and non-graphic posters. They appear on the homepage, `/clinical-experiences`, and the original or veterinary product page as appropriate. They are not represented as genuine clinician testimonials. The seven unchanged PDFs have working View/Download actions in the library and original-product references. The supplied PDFs are not asserted to be a newly certified/current revision for every variant. Conflicting application timings remain out of website instructions.
+
+**Still pending:** verified video captions/transcripts; current product-specific IFU revisions; consent for the separate before/after image; third-party press reproduction; exact variant photography; email credentials/delivery validation; final legal and launch review. Global `SITE_APPROVED` has not been changed. Generated promotional PNGs are excluded where their product depictions differ from authentic packaging. Original `items/` remains unchanged.

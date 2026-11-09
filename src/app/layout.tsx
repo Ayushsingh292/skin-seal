@@ -5,6 +5,7 @@ import { Footer } from "@/components/shared";
 import { site } from "@/data/site";
 import "./globals.css";
 import "./refinements.css";
+import "./company-media.css";
 const inter = localFont({
   src: "../../public/fonts/inter.woff2",
   weight: "400 800",

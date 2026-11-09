@@ -12,6 +12,9 @@ import {
   SectionHeading,
 } from "@/components/shared";
 import { pageMetadata } from "@/lib/metadata";
+import { VideoGallery } from "@/components/video-gallery";
+import { ResourceRows } from "@/components/resource-library";
+import { documents, publishedVideos } from "@/data/media";
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -220,9 +223,11 @@ export default async function ProductPage({
           <div className="info-panel">
             <h3>Documentation & related videos</h3>
             <p>
-              No variant-specific video or document is currently approved for
-              public download. Please request the latest materials from our
-              team.
+              {p.slug === "skinseal"
+                ? "Explore the original SkinSeal catalogue, insert and company-supplied product guides below."
+                : p.slug === "skinseal-veterinary"
+                  ? "Watch the veterinary product video below. Ask our team for the current veterinary-specific insert."
+                  : "The shared resource library includes original SkinSeal materials. Request the current insert for this exact formulation; original-product instructions must not be assumed to apply."}
             </p>
             <Link
               href={`/contact?product=${p.slug}`}
@@ -233,6 +238,25 @@ export default async function ProductPage({
           </div>
         </div>
       </section>
+      {publishedVideos.some((video) => video.product === p.slug) && (
+        <section className="section product-films">
+          <div className="container">
+            <VideoGallery product={p.slug} />
+          </div>
+        </section>
+      )}
+      {p.slug === "skinseal" && (
+        <section className="section">
+          <div className="container">
+            <SectionHeading
+              label="Original SkinSeal / Documents"
+              title="Product references, at hand."
+              description="Company-supplied PDFs. Confirm the current revision for your exact product before use."
+            />
+            <ResourceRows items={documents} />
+          </div>
+        </section>
+      )}
       <section className="section soft-bg">
         <div className="container">
           <SectionHeading

@@ -3,7 +3,7 @@ import { VideoGallery } from "@/components/video-gallery";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Clinical Experiences",
-  "Request SkinSeal professional demonstrations and learn about responsible sharing of clinical experiences.",
+  "Explore SkinSeal product videos and the veterinary range with professional product information.",
   "/clinical-experiences",
 );
 export default function Clinical() {
@@ -11,14 +11,14 @@ export default function Clinical() {
     <>
       <PageHero
         label="Clinical experiences"
-        title="A professional perspective. Shared responsibly."
-        description="Clinical experiences need context, accurate product information and appropriate permission. Explore our approach to professional learning."
+        title="The range in motion. The story behind it."
+        description="Explore SkinSeal through our product videos, discover the veterinary range and find information relevant to your practice."
       />
       <section className="cinema-section clinical-cinema">
         <div className="container">
           <SectionHeading
-            label="Demonstrations & learning"
-            title="Bring your questions. Start a conversation."
+            label="Product videos & professional learning"
+            title="SkinSeal on screen."
           />
           <VideoGallery />
         </div>

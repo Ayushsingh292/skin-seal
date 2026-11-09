@@ -50,7 +50,7 @@ test("closure journey supports keyboard navigation and product-specific guidance
     "Do not pick",
   );
 });
-test("resource search filters real document entries and preserves request context", async ({
+test("resource search filters real document entries and provides approved downloads", async ({
   page,
 }) => {
   await page.goto("/resources");
@@ -58,8 +58,10 @@ test("resource search filters real document entries and preserves request contex
     .getByRole("searchbox", { name: "Search documents" })
     .fill("insert");
   await expect(page.locator(".resource-row")).toHaveCount(1);
-  await page.getByRole("link", { name: "Request current document" }).click();
-  await expect(page.locator("#message")).toHaveValue(/Product Insert/);
+  await expect(page.locator(".resource-row a[download]")).toHaveAttribute(
+    "href",
+    "/documents/skinseal-insert.pdf",
+  );
 });
 test("wide desktop navigation is horizontal and product menu describes formulations", async ({
   page,

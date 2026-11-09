@@ -15,7 +15,8 @@ export const documents: Resource[] = [
     category: "Catalogue",
     product: "SkinSeal",
     size: "6.10 MB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-catalogue.pdf",
   },
   {
     id: "insert",
@@ -23,7 +24,8 @@ export const documents: Resource[] = [
     category: "Instructions for Use",
     product: "SkinSeal",
     size: "1.36 MB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-insert.pdf",
   },
   {
     id: "application",
@@ -31,7 +33,8 @@ export const documents: Resource[] = [
     category: "Application guide",
     product: "SkinSeal",
     size: "304 KB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-application-guide.pdf",
   },
   {
     id: "presentation",
@@ -39,7 +42,8 @@ export const documents: Resource[] = [
     category: "Company document",
     product: "SkinSeal",
     size: "1.63 MB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-presentation.pdf",
   },
   {
     id: "surgical",
@@ -47,7 +51,8 @@ export const documents: Resource[] = [
     category: "Application guide",
     product: "SkinSeal",
     size: "1.32 MB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-surgical-guide.pdf",
   },
   {
     id: "delivery",
@@ -55,7 +60,8 @@ export const documents: Resource[] = [
     category: "Product information",
     product: "SkinSeal",
     size: "614 KB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-delivery-device.pdf",
   },
   {
     id: "comparison",
@@ -63,7 +69,8 @@ export const documents: Resource[] = [
     category: "Product information",
     product: "SkinSeal",
     size: "495 KB",
-    status: "review-required",
+    status: "approved",
+    href: "/documents/skinseal-sutures-comparison.pdf",
   },
 ];
 export type ClinicalVideo = {
@@ -74,23 +81,41 @@ export type ClinicalVideo = {
   status: PublicationStatus;
   src?: string;
   poster?: string;
+  productName: string;
+  duration: string;
+  disclosure: string;
+  orientation: "portrait" | "landscape";
 };
 export const videos: ClinicalVideo[] = [
   {
     id: "brand-video",
-    title: "SkinSeal brand video",
+    title: "SkinSeal product overview",
     description:
-      "AI-labelled source video. Claims and presentation require review; this is not a clinician testimonial.",
+      "Explore SkinSeal and take a closer look at the topical skin adhesive range.",
     product: "skinseal",
-    status: "review-required",
+    productName: "SkinSeal",
+    duration: "2:38",
+    disclosure:
+      "For product information. Follow the current product-specific Instructions for Use and seek professional guidance before use.",
+    orientation: "portrait",
+    status: "approved",
+    src: "/videos/skinseal-ai-brand.mp4",
+    poster: "/images/media/skinseal-ai-brand.webp",
   },
   {
     id: "vet-video",
     title: "SkinSeal veterinary product video",
     description:
-      "Veterinary source video; publication rights and complete content require confirmation.",
+      "Discover the SkinSeal veterinary range and its place in professional veterinary practice.",
     product: "skinseal-veterinary",
-    status: "review-required",
+    productName: "SkinSeal Veterinary",
+    duration: "2:22",
+    disclosure:
+      "For veterinary professionals. Follow the applicable product-specific Instructions for Use.",
+    orientation: "landscape",
+    status: "approved",
+    src: "/videos/skinseal-veterinary.mp4",
+    poster: "/images/media/skinseal-veterinary.webp",
   },
 ];
 export const publishedDocuments = documents.filter(

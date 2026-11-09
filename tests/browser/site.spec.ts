@@ -58,11 +58,9 @@ test("every route renders with unique metadata, intact images and valid local li
         (await page.locator("link[rel=canonical]").getAttribute("href")) || "",
       ).pathname,
     ).toBe(route);
-    await page
-      .locator("img")
-      .evaluateAll((imgs) =>
-        imgs.forEach((im) => ((im as HTMLImageElement).loading = "eager")),
-      );
+    // Scroll naturally: mutating loading before React hydration causes a test-induced mismatch.
+    for (const image of await page.locator("img").all())
+      await image.scrollIntoViewIfNeeded();
     await page.locator("footer").scrollIntoViewIfNeeded();
     await expect
       .poll(
@@ -164,7 +162,10 @@ test("product filters and FAQ operate by keyboard", async ({ page }) => {
   const faq = page.locator(".faq-list summary").first();
   await faq.focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator(".faq-list details").first()).toHaveAttribute("open", "");
+  await expect(page.locator(".faq-list details").first()).toHaveAttribute(
+    "open",
+    "",
+  );
 });
 test("form validates fields and does not fake delivery when credentials are missing", async ({
   page,
@@ -216,22 +217,18 @@ test("API rejects invalid, foreign-origin and bot submissions", async ({
     ).status(),
   ).toBe(415);
 });
-test("unapproved media are not published and unknown products return 404", async ({
+test("approved media are available, private source assets stay excluded and unknown products return 404", async ({
   page,
   request,
 }) => {
   await page.goto("/resources");
-  expect(await page.locator('a[href$=".pdf"]').count()).toBe(0);
-  await expect(
-    page.getByRole("link", { name: "Request current document" }),
-  ).toHaveCount(7);
+  await expect(page.locator(".resource-row a[download]")).toHaveCount(7);
   await page.goto("/clinical-experiences");
   await expect(page.locator("video")).toHaveCount(0);
-  await expect(
-    page.getByText(
-      "No clinical testimonials or patient footage are currently published.",
-    ),
-  ).toBeVisible();
+  await expect(page.locator(".video-card")).toHaveCount(2);
+  expect(
+    (await request.get("/items/before%20and%20after%201.jpg.jpeg")).status(),
+  ).toBe(404);
   expect((await request.get("/products/does-not-exist")).status()).toBe(404);
   expect((await request.get("/robots.txt")).status()).toBe(200);
   expect((await request.get("/sitemap.xml")).status()).toBe(200);

@@ -29,9 +29,9 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-Browser checks cover all 17 content/product routes, metadata, images, local navigation, all nine requested viewport widths, filters, keyboard FAQ, mobile focus and Escape, form validation and missing-delivery feedback, API rejection paths, unapproved-media gating, unknown products and automated WCAG checks. Screenshots go to ignored `.recovery/`; Playwright reports go to ignored `playwright-report/`. Automated checks do not establish full WCAG conformance. See `VERIFICATION.md` for measured results and limits.
+Browser checks cover all 17 content/product routes, metadata, images, local navigation, all nine requested viewport widths, filters, keyboard FAQ, mobile focus and Escape, form validation and missing-delivery feedback, API rejection paths, media approval gating, real PDF endpoints and on-demand video playback, unknown products and automated WCAG checks. Screenshots go to ignored `.recovery/`; Playwright reports go to ignored `playwright-report/`. Automated checks do not establish full WCAG conformance. See `VERIFICATION.md` for measured results and limits.
 
-The editorial suite also covers formulation-tab arrow navigation, absence of false variant packaging, process-step Home/End navigation, document-search request context, and horizontal desktop navigation with a substantial product menu.
+The editorial suite also covers formulation-tab arrow navigation, absence of false variant packaging, process-step Home/End navigation, document-search downloads, and horizontal desktop navigation with a substantial product menu.
 
 ## Routes and source
 
@@ -65,7 +65,11 @@ Deploy behind a trusted proxy that overwrites forwarding headers. Add shared/edg
 
 Read [ASSET_AUDIT.md](ASSET_AUDIT.md) and [CONTENT_REVIEW.md](CONTENT_REVIEW.md) before publishing. The original SkinSeal and veterinary carton artwork is integrated. The supplied catalogue's original 2419 × 451px applicator artwork is also integrated without recreating the product. Four other families use product-specific typographic formulation presentations with `image: null`; no one product's packaging is assigned to another formulation. Representative clinical photographs were refreshed from the documented licensed sources at 1600px wide.
 
-All seven PDFs and both videos remain withheld pending medical/rights review. No public-safe authorization for these was supplied, and application instructions conflict between sources. Resources therefore offer functional document requests. No clinical testimonials, patient outcomes or AI presenter videos are published. The video player and PDF view/download UI support approved entries once genuine reviewed assets and manifest paths are provided; those branches must be tested with the final approved files.
+Both full company videos and all seven source PDFs are now integrated following the owner's explicit confirmation of rights, consent and clinical approval on 9 November 2026. The homepage and `/clinical-experiences` show labelled AI/promotional films with click-to-load native players. Original and veterinary product pages show only their associated film; the original product page also lists its documents. The library provides genuine PDF View/Download links and a catalogue-cover preview. Supplied source PDFs remain byte-identical; instruction revision differences are not rewritten as new clinical guidance.
+
+Videos are optimized H.264/AAC MP4 with fast-start metadata: approximately 10.72 MiB and 18.10 MiB (about 69% smaller combined than originals). They load only after opening a player and never autoplay. Source files remain unchanged. Verified captions/transcripts remain a documented accessibility follow-up. Standalone patient photos, third-party press and generated packaging artwork remain excluded.
+
+To regenerate delivery files locally, install Python with PyMuPDF/Pillow and ffmpeg, then run `python scripts/prepare_company_media.py`. These tools are optional: generated public files are included, so website installation/build requires only Node/npm.
 
 To release a document, record approval in `CONTENT_REVIEW.md`, copy the vetted file into `public/documents`, and set its manifest status and `href`. For videos, also provide a lightweight non-graphic poster, captions/transcript as needed, `src`, product association and accurate description. Recheck performance, mobile controls, dialog focus and resource downloads. Never serve originals directly from `items/`.
 
@@ -90,3 +94,5 @@ Safety checkpoint outside the repository: `../skinseal-safety-20261109/`, contai
 Company assets: supplied SkinSeal packaging and catalogue logo. Representative photography: Pexels, under https://www.pexels.com/license/; individual sources are in the asset audit. No endorsement is implied. Fonts: Google Fonts official repository, licensed under OFL; license files are in `public/fonts/`.
 
 Optional asset/review utilities in `scripts/` use Python with Pillow/PyMuPDF/OpenCV for source inspection, or the existing Playwright browser dependencies for local screenshots/accessibility diagnostics. Python is not required to install, run or build the website. Inspection outputs are saved only under ignored `.recovery/redesign/`.
+
+Current media-integration branch: `skinseal-media-integration`, based on `33e681a`. Local source hash checkpoint: `.recovery/media-integration/source-hashes.json`. Changes have not been pushed or deployed by this agent.
