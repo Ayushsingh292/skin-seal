@@ -1,4 +1,5 @@
-import { CTA, PageHero, ResourceCards } from "@/components/shared";
+import { CTA, PageHero } from "@/components/shared";
+import { ResourceLibrary } from "@/components/resource-library";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
   "Resource Centre",
@@ -23,7 +24,7 @@ export default function Resources() {
               Until then, request the exact document you need.
             </p>
           </div>
-          <ResourceCards />
+          <ResourceLibrary />
           <p className="section-note">
             Listed file sizes refer to the supplied source files. Resource
             availability does not replace professional assessment or the

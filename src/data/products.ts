@@ -6,14 +6,14 @@ export type Product = {
   sizes: string[];
   description: string;
   category: "Medical" | "Dental" | "Veterinary";
-  image: string;
+  image: string | null;
   imageNote: string;
   accent: string;
   applications: string[];
 };
 const referenceImage = "/images/products/skinseal.webp";
 const referenceNote =
-  "SkinSeal family packaging shown. Variant-specific photography is available on request.";
+  "Product-specific formulation presentation. Exact variant photography is available on request.";
 export const products: Product[] = [
   {
     slug: "skinseal",
@@ -41,7 +41,7 @@ export const products: Product[] = [
     description:
       "The octyl cyanoacrylate formulation in the SkinSeal topical adhesive family.",
     category: "Medical",
-    image: referenceImage,
+    image: null,
     imageNote: referenceNote,
     accent: "blue",
     applications: [
@@ -57,7 +57,7 @@ export const products: Product[] = [
     description:
       "A butyl cyanoacrylate formulation with nano silver. Consult the product documentation for its intended use.",
     category: "Medical",
-    image: referenceImage,
+    image: null,
     imageNote: referenceNote,
     accent: "purple",
     applications: [
@@ -73,7 +73,7 @@ export const products: Product[] = [
     description:
       "An octyl cyanoacrylate formulation with nano silver, within the SkinSeal range.",
     category: "Medical",
-    image: referenceImage,
+    image: null,
     imageNote: referenceNote,
     accent: "amber",
     applications: [
@@ -89,7 +89,7 @@ export const products: Product[] = [
     description:
       "A dedicated dental range. Request the exact variant’s indications and product information before selection.",
     category: "Dental",
-    image: referenceImage,
+    image: null,
     imageNote: referenceNote,
     accent: "blue",
     applications: [

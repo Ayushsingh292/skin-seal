@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Play, X, Video } from "lucide-react";
 import Link from "next/link";
+import { Play, X, ArrowUpRight, ArrowRight } from "lucide-react";
 import { publishedVideos, type ClinicalVideo } from "@/data/media";
 export function VideoGallery() {
   const [selected, setSelected] = useState<ClinicalVideo | null>(null);
@@ -19,8 +19,8 @@ export function VideoGallery() {
         <div className="video-grid">
           {publishedVideos.map((v) => (
             <button
-              className="video-card"
               key={v.id}
+              className="video-card"
               onClick={(e) => {
                 opener.current = e.currentTarget;
                 setSelected(v);
@@ -32,44 +32,70 @@ export function VideoGallery() {
                   src={v.poster!}
                   alt=""
                   fill
-                  sizes="(max-width: 700px) 90vw, 45vw"
+                  sizes="(max-width:760px) 90vw,50vw"
                 />
                 <span className="play-circle">
-                  <Play />
+                  <Play fill="currentColor" />
                 </span>
               </div>
+              <span className="video-category">
+                Product demonstration / {v.product}
+              </span>
               <h3>{v.title}</h3>
               <p>{v.description}</p>
             </button>
           ))}
         </div>
       ) : (
-        <div className="media-request">
-          <div className="media-request-art">
-            <span className="large-play">
-              <Video size={44} strokeWidth={1} />
-            </span>
-            <span>PRODUCT KNOWLEDGE · PROFESSIONAL CARE</span>
-          </div>
-          <div>
-            <p className="eyebrow">Clinical learning</p>
-            <h3>
-              See the application.
+        <div className="cinema-request">
+          <div className="cinema-copy">
+            <p className="eyebrow">A closer look</p>
+            <h2>
+              Understand
               <br />
-              Understand the product.
-            </h3>
+              the product.
+              <br />
+              <span>See the detail.</span>
+            </h2>
             <p>
-              Speak with our team to request a product demonstration or the
-              latest professional learning materials for your chosen SkinSeal
+              Bring the SkinSeal range into focus. Request a professional
+              demonstration and the relevant learning materials for your chosen
               formulation.
             </p>
-            <p className="muted small-copy">
-              No clinical testimonials or patient footage are currently
-              published.
-            </p>
-            <Link className="button" href="/contact?type=demonstration">
-              Request a Demonstration <Play size={15} />
+            <Link className="button white" href="/contact?type=demonstration">
+              Request a Demonstration <ArrowUpRight size={20} />
             </Link>
+            <Link className="text-link" href="/clinical-experiences">
+              Clinical experiences & learning <ArrowRight size={18} />
+            </Link>
+          </div>
+          <div className="cinema-product">
+            <div className="cinema-frame-top">
+              <span>SKINSEAL / PRODUCT FOCUS</span>
+              <span>01 — ORIGINAL</span>
+            </div>
+            <div className="cinema-product-image">
+              <Image
+                src="/images/products/original-applicator.webp"
+                alt="Original SkinSeal applicator detail from the supplied company catalogue"
+                width={2419}
+                height={451}
+                sizes="(max-width:760px) 85vw,50vw"
+              />
+            </div>
+            <div className="cinema-caption">
+              <span>Original product imagery.</span>
+              <p>
+                No clinical testimonials or patient footage are currently
+                published.
+              </p>
+              <Link
+                href="/contact?type=demonstration"
+                aria-label="Ask about a SkinSeal demonstration"
+              >
+                <ArrowUpRight size={25} />
+              </Link>
+            </div>
           </div>
         </div>
       )}

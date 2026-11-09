@@ -15,7 +15,7 @@ The website is a local development rebuild. No deployment has been performed. `S
 2. Supply the current manufacturer-approved IFU for EACH medical, dental and veterinary variant. Existing documents conflict: the presentation says 10–15 seconds, while guide/insert say 30–60 seconds. Broad intraoral and surgical claims also need reconciliation. No application timings are published on the site.
 3. Approve final application descriptions and five-stage educational overview. The website explicitly requires professional assessment and product-specific instructions. Dental/veterinary indications are not inferred from the original medical insert.
 4. Review sterility and single-use applicability for each variant. The homepage asterisk refers to the original source insert; the website avoids asserting comparative clinical benefit from nano silver.
-5. Provide authentic individual Plus, Adv, Adv Plus and Dental packaging photography. Until then their cards and pages explicitly identify the original SkinSeal family packaging as a reference image.
+5. Provide authentic individual Plus, Adv, Adv Plus and Dental packaging photography. The editorial redesign uses product-specific typographic formulation presentations for those variants, with `image: null` in the typed manifest. Original SkinSeal packaging is no longer repeated to represent them.
 6. Review all seven source PDFs for clinical accuracy, current revision, copyright and distribution authorization. No PDFs are publicly downloadable yet; resource requests are functional. Catalogue references do not by themselves substantiate every marketing claim.
 7. Both source videos remain withheld. One is explicitly AI-labelled and must not appear as a doctor testimonial. Obtain complete transcripts, review all frames/audio and verify publication permissions, clinical context and people/animal-treatment imagery before authorizing a public copy.
 8. Do not publish the clinical before/after collage without documented patient authorization, contextual clinical review and verification that the result is authentic. Do not manipulate outcomes. The press article needs publisher reproduction rights and portrait authorization.
@@ -35,3 +35,9 @@ Record reviewer, decision, date, product/variant, rights, consent, source revisi
 ## Approval record
 
 No clinical media/document approval records have been supplied. Company packaging and brand artwork are used within the user’s express authorization to preserve and integrate authentic company assets. Everything requiring separate publication authorization remains withheld.
+
+## Editorial redesign asset decision
+
+Reinspected all 17 original files and six representative frames from each video. The original catalogue contains a 2419 × 451-pixel authentic SkinSeal applicator image, now extracted and integrated as product artwork. It depicts no person or patient. Both videos still require full medical/rights review; sampled veterinary frames include a Veo watermark and a synthetic-looking presenter, so they must not be described as genuine clinician experiences without verification. No approval has been inferred from permission to inspect source files.
+
+New interactive catalogue and process copy uses the same conservative, previously sourced facts. The professional-learning section is a demonstration request when no approved media exists; it does not display a false play button. The resource library preserves the real seven-document inventory, search, type filters and request context. Approved entries support View/Download, but none is currently approved.

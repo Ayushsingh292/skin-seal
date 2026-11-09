@@ -22,9 +22,24 @@ export default function Why() {
         description="Explore the topical approach and the product family, with clinical suitability and the current Instructions for Use guiding every selection."
       />
       <section className="section">
-        <div className="container">
-          <BenefitGrid />
-          <MedicalNotice />
+        <div className="container principle-layout">
+          <div className="principle-heading">
+            <p className="eyebrow">The topical approach</p>
+            <h2>
+              Purpose in the product.
+              <br />
+              <em>Judgement in the practice.</em>
+            </h2>
+            <p>
+              Explore practical product characteristics. The right selection
+              always starts with the exact product’s documentation and clinical
+              assessment.
+            </p>
+          </div>
+          <div>
+            <BenefitGrid />
+            <MedicalNotice />
+          </div>
         </div>
       </section>
       <section className="section process-section">

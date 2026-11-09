@@ -1,6 +1,6 @@
 # SkinSeal premium website
 
-Complete local rebuild of the SkinSeal professional product website using the existing Next.js 16.4.5 App Router, React 19.3, TypeScript, React Hook Form, Zod and Lucide. Styling uses a lightweight token-based CSS system; animation uses CSS and respects reduced motion. Inter and Manrope are self-hosted variable fonts. No deployment has been performed.
+Premium editorial redesign of the SkinSeal professional product website using the existing Next.js 16.4.5 App Router, React 19.3, TypeScript, React Hook Form, Zod, Lucide and Motion for React. The design uses a deep-navy product hero, an interactive formulation catalogue, an editorial applications mosaic, a keyboard-operated closure journey and a searchable document index. Inter and Manrope are self-hosted variable fonts. No deployment has been performed.
 
 ## Run locally
 
@@ -31,13 +31,18 @@ npm run test:e2e
 
 Browser checks cover all 17 content/product routes, metadata, images, local navigation, all nine requested viewport widths, filters, keyboard FAQ, mobile focus and Escape, form validation and missing-delivery feedback, API rejection paths, unapproved-media gating, unknown products and automated WCAG checks. Screenshots go to ignored `.recovery/`; Playwright reports go to ignored `playwright-report/`. Automated checks do not establish full WCAG conformance. See `VERIFICATION.md` for measured results and limits.
 
+The editorial suite also covers formulation-tab arrow navigation, absence of false variant packaging, process-step Home/End navigation, document-search request context, and horizontal desktop navigation with a substantial product menu.
+
 ## Routes and source
 
 - `/`, `/about`, `/products`, all six `/products/[slug]` routes, `/applications`, `/why-skinseal`, `/clinical-experiences`, `/resources`, `/contact`, `/privacy-policy`, `/terms`, `/disclaimer`.
 - `src/data/products.ts`: typed product descriptions, compositions, sizes and explicit image-reference notes.
 - `src/data/applications.ts`, `src/data/site.ts`: application areas, navigation and company details.
 - `src/data/media.ts`: typed document/video publication manifest.
-- `src/components`: shared layout, cards, filters, form and approval-aware video gallery.
+- `src/components/product-catalogue.tsx`, `closure-journey.tsx`: accessible interactive product and process experiences, using lightweight Motion `LazyMotion`/`m` features and reduced-motion preferences.
+- `src/components/product-visual.tsx`: genuine original/Vet pack imagery and distinct typographic presentations for variants without photographs.
+- `src/components/resource-library.tsx`: search, document-type filtering, genuine inventory metadata, and approval-aware resource actions.
+- `src/components`: shared editorial layout, navigation, form and approval-aware video gallery.
 - `src/lib/validations.ts`: shared client/server enquiry schema.
 - `src/app/api/enquiries/route.ts`: server-only Resend delivery integration.
 - `public/images`: local, optimized packaging/brand assets and representative Pexels photography.
@@ -58,7 +63,7 @@ Deploy behind a trusted proxy that overwrites forwarding headers. Add shared/edg
 
 ## Media and launch review
 
-Read [ASSET_AUDIT.md](ASSET_AUDIT.md) and [CONTENT_REVIEW.md](CONTENT_REVIEW.md) before publishing. The original SkinSeal and veterinary carton artwork is integrated. Other variants honestly show a labelled family reference because authentic individual photography was unavailable.
+Read [ASSET_AUDIT.md](ASSET_AUDIT.md) and [CONTENT_REVIEW.md](CONTENT_REVIEW.md) before publishing. The original SkinSeal and veterinary carton artwork is integrated. The supplied catalogue's original 2419 × 451px applicator artwork is also integrated without recreating the product. Four other families use product-specific typographic formulation presentations with `image: null`; no one product's packaging is assigned to another formulation. Representative clinical photographs were refreshed from the documented licensed sources at 1600px wide.
 
 All seven PDFs and both videos remain withheld pending medical/rights review. No public-safe authorization for these was supplied, and application instructions conflict between sources. Resources therefore offer functional document requests. No clinical testimonials, patient outcomes or AI presenter videos are published. The video player and PDF view/download UI support approved entries once genuine reviewed assets and manifest paths are provided; those branches must be tested with the final approved files.
 
@@ -72,8 +77,12 @@ Initial commit: `66b2133` (Create Next App). At task start every tracked file ha
 
 Branch: `skinseal-premium-rebuild`.
 
+Current visual-redesign branch: `skinseal-editorial-redesign`, based on `35fcbfa`. The starting code and uncommitted state were preserved in `../skinseal-editorial-checkpoint-20261109/` with a repository bundle, working-tree patch and source-file hashes. Original `items/` remains untracked and unchanged; no source material was removed. The previous full asset backup remains in the earlier checkpoint.
+
 Safety checkpoint outside the repository: `../skinseal-safety-20261109/`, containing `repository.bundle`, `working-tree.patch`, `items-sha256.json` and a full `items/` backup. The patch preserves the initial deletions. No reset, clean, force push or environment-file removal was used. Source hashes in the audit allow comparison. Git restore was used only for files verified absent and preserved by that checkpoint.
 
 ## Asset attribution
 
 Company assets: supplied SkinSeal packaging and catalogue logo. Representative photography: Pexels, under https://www.pexels.com/license/; individual sources are in the asset audit. No endorsement is implied. Fonts: Google Fonts official repository, licensed under OFL; license files are in `public/fonts/`.
+
+Optional asset/review utilities in `scripts/` use Python with Pillow/PyMuPDF/OpenCV for source inspection, or the existing Playwright browser dependencies for local screenshots/accessibility diagnostics. Python is not required to install, run or build the website. Inspection outputs are saved only under ignored `.recovery/redesign/`.

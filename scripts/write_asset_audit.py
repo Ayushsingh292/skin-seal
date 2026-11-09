@@ -45,4 +45,26 @@ lines+=['','## Quality and duplicates','','The official site was retrieved direc
 '| `public/images/applications/veterinary.webp` | https://www.pexels.com/photo/doctor-checking-on-a-dog-7469233/ — Mikhail Nilov | Vet team examining a dog | Veterinary setting |',
 '| `public/images/applications/minor-cuts.webp` | https://www.pexels.com/photo/8941908/ | Ambulance healthcare professional | Unused early selection; replaced by wound-care image |',
 '','Downloaded stock originals are at least 927px on the short edge before the site’s responsive optimization. Portrait images are deliberately cropped with CSS `object-fit: cover`; they are not stretched.','','## Fonts','','Inter and Manrope variable fonts are self-hosted and Latin-subsetted to WOFF2. Source: Google Fonts official repository, `ofl/inter/Inter[opsz,wght].ttf` and `ofl/manrope/Manrope[wght].ttf`. OFL licenses are retained under `public/fonts/`.','','## Public media policy','','No original PDF or video has been copied into public directories. The typed manifest in `src/data/media.ts` gates documents and videos by publication status AND a real asset path. Approval requires a documented owner decision, medical/content review, permission as applicable, a vetted public copy, and updated metadata. A status change alone does not expose an original source file.','','## Source SHA-256 inventory','','```text',*hashes,'```']
-Path('ASSET_AUDIT.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+audit_text='\n'.join(lines)+'\n'
+audit_text=audit_text.replace('sampled at 5%, 30%, 60% and 90%','sampled at 3%, 20%, 40%, 60%, 80% and 95%').replace('sampled at four positions','sampled at six positions').replace('four sampled frames per file','six sampled frames per file')
+audit_text=audit_text.replace('Hero, original product page and clearly labelled family reference cards.','Hero and original SkinSeal product presentation only.').replace('Logo extracted from page 1; complete PDF withheld pending claims review.','Logo and authentic original applicator artwork extracted from page 1; complete PDF withheld.').replace('LOGO ONLY PUBLIC-SAFE; PDF WITHHELD','LOGO / ORIGINAL PRODUCT ARTWORK PUBLIC-SAFE; PDF WITHHELD')
+audit_text=audit_text.replace('cards explicitly say \u201cFamily packaging shown\u201d.','the redesign uses distinct typographic formulation presentations instead of repeating another product\u2019s packaging.')
+Path('ASSET_AUDIT.md').write_text(audit_text,encoding='utf-8')
+with Path('ASSET_AUDIT.md').open('a',encoding='utf-8') as audit:
+    audit.write('''
+## Editorial redesign reinspection — 9 November 2026
+
+All 17 source files were enumerated again recursively. Every image was opened and measured; all extractable PDF text was read, scanned catalogue/insert pages were rendered, and both videos were sampled at 3%, 20%, 40%, 60%, 80% and 95%. Current machine-readable metadata and private contact sheets are in ignored `.recovery/redesign/`. Original `items/` files are unchanged.
+
+Newly integrated artwork: `public/images/products/original-applicator.webp`, extracted from the original catalogue, page 1, embedded image xref 30 (2419 × 451 pixels). This is genuine supplied product artwork, converted from its embedded colour space to RGB/WebP. Labels and product shape were not recreated. No person or patient is depicted. Used in the hero product stage, original-product presentation, company story and professional-learning section. Publication basis: the user's express authorization to use non-private authentic company product/brand artwork.
+
+The original and veterinary carton artwork are used only for their own product representations. Plus, Adv, Adv Plus and Dental now have distinct typographic formulation presentations and `image: null` in the product manifest. The earlier family-packaging fallback is no longer displayed for those variants. No replacement packaging render was created.
+
+Source video observations: the AI-labelled video includes presenter scenes and medical imagery. The veterinary video also includes a synthetic-looking presenter and frames bearing a Veo watermark. These are not verified genuine clinician testimonials. Rights, full audio, medical claims and any identifiable clinical imagery remain unapproved. No source video or frame from either file is exposed publicly.
+
+All seven PDFs remain available only by request until clinical accuracy, revision and publication authorization are confirmed. The website's search/filterable library lists the actual document inventory and real source sizes; it does not invent download files.
+
+Representative clinical photographs were refreshed from the same documented Pexels sources at 1600 pixels wide where originals permit. They remain explicitly representative and do not imply SkinSeal use or endorsement. The stock source permissions and attribution above are retained. Earlier thumbnails/private inspection outputs are never used as the new page imagery.
+
+Safety checkpoint for this redesign: `../skinseal-editorial-checkpoint-20261109/` contains a Git bundle, original working-tree diff and current source-asset SHA-256 inventory. Working branch: `skinseal-editorial-redesign`; starting code commit: `35fcbfa`.
+''')

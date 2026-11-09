@@ -8,6 +8,7 @@ import {
   Eyebrow,
   MedicalNotice,
   ProductGrid,
+  ProductArt,
   SectionHeading,
 } from "@/components/shared";
 import { pageMetadata } from "@/lib/metadata";
@@ -50,16 +51,7 @@ export default async function ProductPage({
           </div>
           <div className="detail-grid">
             <div className="detail-visual">
-              <span className="product-tag">{p.category} range</span>
-              <Image
-                src={p.image}
-                alt={p.imageNote}
-                width={1193}
-                height={595}
-                sizes="(max-width: 800px) 90vw, 48vw"
-                preload
-              />
-              <p>{p.imageNote}</p>
+              <ProductArt product={p} priority />
             </div>
             <div className="detail-copy">
               <Eyebrow>{p.label}</Eyebrow>
@@ -153,24 +145,44 @@ export default async function ProductPage({
         <div className="container">
           <SectionHeading
             label="Product gallery"
-            title="A closer look at the packaging."
-            description={p.imageNote}
+            title={
+              p.slug === "skinseal" || p.category === "Veterinary"
+                ? "The details, in view."
+                : "A distinct formulation. A clear identity."
+            }
+            description={
+              p.slug === "skinseal" || p.category === "Veterinary"
+                ? p.imageNote
+                : "A product-specific formulation presentation. Request exact variant photography and documentation from our team."
+            }
           />
           <div className="packaging-gallery">
-            <figure>
-              <Image
-                src={p.image}
-                alt={p.imageNote}
-                width={1193}
-                height={595}
-                sizes="(max-width: 800px) 90vw, 45vw"
-              />
-              <figcaption>
-                {p.category === "Veterinary"
-                  ? "SkinSeal Vet — front of pack"
-                  : "SkinSeal — family packaging reference"}
-              </figcaption>
-            </figure>
+            {p.slug === "skinseal" || p.category === "Veterinary" ? (
+              <figure>
+                <Image
+                  src={p.image!}
+                  alt={p.imageNote}
+                  width={1193}
+                  height={595}
+                  sizes="(max-width: 800px) 90vw, 45vw"
+                />
+                <figcaption>
+                  {p.category === "Veterinary"
+                    ? "SkinSeal Vet — front of pack"
+                    : "SkinSeal — family packaging reference"}
+                </figcaption>
+              </figure>
+            ) : (
+              <div className="formulation-gallery-note">
+                <span>SKINSEAL / FORMULATION PROFILE</span>
+                <h3>{p.name}</h3>
+                <p>{p.composition}</p>
+                <div>{p.sizes.join(" · ")}</div>
+                <Link className="text-link" href={`/contact?product=${p.slug}`}>
+                  Request exact product information <ArrowUpRight size={19} />
+                </Link>
+              </div>
+            )}
             {p.slug === "skinseal" && (
               <figure>
                 <Image

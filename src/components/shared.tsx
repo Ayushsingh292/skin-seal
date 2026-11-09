@@ -3,24 +3,19 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  Check,
-  Droplet,
   ShieldCheck,
-  Sparkles,
-  PackageCheck,
-  Crosshair,
-  Layers,
-  FileText,
-  Download,
   Mail,
   Phone,
   MapPin,
+  Plus,
 } from "lucide-react";
 import { products, type Product } from "@/data/products";
 import { applications } from "@/data/applications";
-import { benefits, navigation, site, steps, faqs } from "@/data/site";
+import { benefits, navigation, site, faqs } from "@/data/site";
 import { documents } from "@/data/media";
-
+import { ProductVisual } from "./product-visual";
+import { ClosureJourney } from "./closure-journey";
+import { ResourceRows } from "./resource-library";
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <p className="eyebrow">
@@ -48,10 +43,19 @@ export function PageHero({
           <span>/</span>
           {label}
         </div>
-        <Eyebrow>{label}</Eyebrow>
-        <h1>{title}</h1>
-        <p className="lead">{description}</p>
-        {children}
+        <div className="page-hero-layout">
+          <div>
+            <Eyebrow>{label}</Eyebrow>
+            <h1>{title}</h1>
+          </div>
+          <div>
+            <p className="lead">{description}</p>
+            {children}
+          </div>
+        </div>
+        <span className="page-hero-mark" aria-hidden="true">
+          +
+        </span>
       </div>
     </section>
   );
@@ -78,7 +82,8 @@ export function SectionHeading({
       </div>
       {href && (
         <Link className="text-link" href={href}>
-          {link} <ArrowUpRight size={18} />
+          {link}
+          <ArrowUpRight size={20} />
         </Link>
       )}
     </div>
@@ -86,56 +91,46 @@ export function SectionHeading({
 }
 export function ProductCard({ product: p }: { product: Product }) {
   return (
-    <article className={`product-card accent-${p.accent}`}>
-      <Link
-        href={`/products/${p.slug}`}
-        className="product-image"
-        aria-label={`Explore ${p.name} — ${p.category}`}
-      >
-        <span className="product-tag">{p.category}</span>
-        <Image
-          src={p.image}
-          alt={
-            p.slug === "skinseal-veterinary"
-              ? "SkinSeal Vet 0.50 mL product packaging"
-              : "Original SkinSeal 0.25 mL family packaging"
-          }
-          width={1193}
-          height={595}
-          sizes="(max-width: 700px) 90vw, (max-width: 1100px) 45vw, 30vw"
-        />
-      </Link>
-      <div className="product-card-content">
-        <p className="product-label">{p.label}</p>
+    <article className={`product-card catalogue-row catalogue-${p.slug}`}>
+      <span className="catalogue-row-number">0{products.indexOf(p) + 1}</span>
+      <div className="catalogue-row-title">
+        <span>
+          {p.category} / {p.label}
+        </span>
         <h3>
           <Link href={`/products/${p.slug}`}>{p.name}</Link>
         </h3>
-        <p className="composition">{p.composition}</p>
-        <p>{p.description}</p>
-        <div className="product-card-bottom">
-          <span>{p.sizes.join(" / ")}</span>
-          <Link
-            href={`/products/${p.slug}`}
-            aria-label={`View Details: ${p.name}`}
-          >
-            View Details <ArrowUpRight size={17} />
-          </Link>
-        </div>
-        {p.slug !== "skinseal" && p.category !== "Veterinary" && (
-          <small className="image-note">Family packaging shown</small>
-        )}
+        <p className="catalogue-description">{p.description}</p>
       </div>
+      <p className="catalogue-row-composition">{p.composition}</p>
+      <span className="catalogue-row-sizes">{p.sizes.join(" / ")}</span>
+      <Link
+        className="catalogue-row-link"
+        href={`/products/${p.slug}`}
+        aria-label={`View Details: ${p.name}`}
+      >
+        View Details <ArrowUpRight size={20} />
+      </Link>
     </article>
   );
 }
 export function ProductGrid({ items = products }: { items?: Product[] }) {
   return (
-    <div className="product-grid">
+    <div className="product-grid catalogue-index">
       {items.map((p) => (
         <ProductCard key={p.slug} product={p} />
       ))}
     </div>
   );
+}
+export function ProductArt({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
+  return <ProductVisual product={product} priority={priority} />;
 }
 export function ApplicationGrid({ limit }: { limit?: number }) {
   return (
@@ -150,49 +145,49 @@ export function ApplicationGrid({ limit }: { limit?: number }) {
             src={`/images/applications/${a.image}.webp`}
             alt={a.alt}
             fill
-            sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 30vw"
+            sizes={
+              i === 0
+                ? "(max-width:760px) 90vw, 50vw"
+                : "(max-width:760px) 45vw, 30vw"
+            }
           />
           <div className="application-overlay">
-            <span className="application-number">0{i + 1}</span>
+            <span className="application-number">
+              0{i + 1} / AREA OF PRACTICE
+            </span>
             <h3>{a.name}</h3>
-            <ArrowUpRight size={22} />
+            <ArrowUpRight size={24} />
+            {i === 0 && (
+              <p>
+                Selected superficial skin closures.
+                <br />
+                Professional assessment, always.
+              </p>
+            )}
           </div>
         </Link>
       ))}
     </div>
   );
 }
-const icons = [Droplet, Sparkles, ShieldCheck, PackageCheck, Crosshair, Layers];
 export function BenefitGrid() {
   return (
     <div className="benefit-grid">
-      {benefits.map((b, i) => {
-        const Icon = icons[i];
-        return (
-          <article className="benefit" key={b.title}>
-            <span className="icon-box">
-              <Icon size={25} strokeWidth={1.5} />
-            </span>
+      {benefits.map((b, i) => (
+        <article className="benefit" key={b.title}>
+          <span>0{i + 1}</span>
+          <div>
             <h3>{b.title}</h3>
             <p>{b.text}</p>
-          </article>
-        );
-      })}
-    </div>
-  );
-}
-export function Process() {
-  return (
-    <div className="process">
-      {steps.map(([title, text], i) => (
-        <article key={title}>
-          <span className="step-number">0{i + 1}</span>
-          <h3>{title}</h3>
-          <p>{text}</p>
+          </div>
+          <Plus size={19} strokeWidth={1} />
         </article>
       ))}
     </div>
   );
+}
+export function Process() {
+  return <ClosureJourney />;
 }
 export function FAQ() {
   return (
@@ -210,57 +205,37 @@ export function FAQ() {
   );
 }
 export function ResourceCards({ limit }: { limit?: number }) {
-  return (
-    <div className="resource-grid">
-      {documents.slice(0, limit).map((d) => (
-        <article className="resource-card" key={d.id}>
-          <div className="document-top">
-            <FileText size={32} strokeWidth={1.3} />
-            <span>PDF · {d.size}</span>
-          </div>
-          <p className="product-label">{d.category}</p>
-          <h3>{d.title}</h3>
-          <p>{d.product} product information</p>
-          {d.status === "approved" && d.href ? (
-            <div className="resource-actions">
-              <a href={d.href} target="_blank" rel="noopener noreferrer">
-                View PDF <ArrowUpRight size={16} />
-              </a>
-              <a href={d.href} download>
-                Download <Download size={16} />
-              </a>
-            </div>
-          ) : (
-            <Link className="text-link" href={`/contact?resource=${d.id}`}>
-              Request current document <ArrowUpRight size={16} />
-            </Link>
-          )}
-        </article>
-      ))}
-    </div>
-  );
+  return <ResourceRows items={documents.slice(0, limit)} />;
 }
 export function CTA() {
   return (
     <section className="cta-section">
       <div className="container cta-inner">
         <div>
-          <Eyebrow>Let’s move care forward</Eyebrow>
+          <Eyebrow>A conversation worth starting</Eyebrow>
           <h2>
-            Discover the right SkinSeal
-            <br className="desktop-break" /> solution for your practice.
+            Your practice.
+            <br />
+            <span>The right SkinSeal solution.</span>
           </h2>
-          <p>Connect with our team for product information and availability.</p>
         </div>
-        <div className="cta-buttons">
-          <Link className="button white" href="/contact">
-            Contact Us <ArrowUpRight size={18} />
-          </Link>
-          <Link className="button outline-light" href="/products">
-            Explore Products <ArrowRight size={18} />
-          </Link>
+        <div className="cta-copy">
+          <p>
+            Product information, availability or a closer look at the range. Our
+            team is here to help.
+          </p>
+          <div className="button-row">
+            <Link className="button white" href="/contact">
+              Contact Us <ArrowUpRight size={20} />
+            </Link>
+            <Link className="text-link" href="/products">
+              Explore Products <ArrowRight size={20} />
+            </Link>
+          </div>
         </div>
-        <span className="cta-orbit" aria-hidden="true" />
+        <span className="cta-plus" aria-hidden="true">
+          +
+        </span>
       </div>
     </section>
   );
@@ -279,6 +254,15 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
+        <div className="footer-signature">
+          <span>SkinSeal / Topical skin adhesives</span>
+          <p>
+            Just Seal <span>&</span> Heal.
+          </p>
+          <Link href="/contact" aria-label="Contact SkinSeal">
+            <ArrowUpRight size={48} strokeWidth={1} />
+          </Link>
+        </div>
         <div className="footer-grid">
           <div className="footer-brand">
             <Link href="/" aria-label="SkinSeal home">
@@ -286,15 +270,15 @@ export function Footer() {
                 src="/images/brand/skinseal-logo.png"
                 alt="SkinSeal"
                 width={145}
-                height={78}
+                height={116}
               />
             </Link>
             <p>
               Advanced topical skin adhesives.
               <br />
-              Thoughtfully developed for professional care.
+              For a considered approach to professional care.
             </p>
-            <span className="footer-tagline">Just Seal & Heal.</span>
+            <span>Medical · Dental · Veterinary</span>
           </div>
           <div>
             <h3>Explore</h3>
@@ -307,7 +291,7 @@ export function Footer() {
               ))}
           </div>
           <div>
-            <h3>Our Products</h3>
+            <h3>Product portfolio</h3>
             {products.map((p) => (
               <Link href={`/products/${p.slug}`} key={p.slug}>
                 {p.name}
@@ -315,7 +299,7 @@ export function Footer() {
             ))}
           </div>
           <div className="footer-contact">
-            <h3>Get in touch</h3>
+            <h3>Connect with our team</h3>
             <a href={`tel:${site.tel}`}>
               <Phone size={16} />
               {site.phone}
@@ -342,9 +326,7 @@ export function Footer() {
             <Link href="/terms">Terms</Link>
             <Link href="/disclaimer">Disclaimer</Link>
           </div>
-          <span className="made-india">
-            <Check size={14} /> Based in India. Focused on care.
-          </span>
+          <span>India / Professional care</span>
         </div>
       </div>
     </footer>

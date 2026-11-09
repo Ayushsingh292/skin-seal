@@ -17,6 +17,30 @@ export default function About() {
         title="Thoughtful technology. A human purpose."
         description="A professional approach to topical skin closure, with product information and clinical judgement at its centre."
       />
+      <section className="about-product-band">
+        <div className="container">
+          <div>
+            <Eyebrow>The brand, in focus</Eyebrow>
+            <h2>
+              Small in application.
+              <br />
+              Considered in purpose.
+            </h2>
+            <p>
+              The original SkinSeal applicator, reproduced from our supplied
+              product catalogue. A tangible introduction to a range built around
+              topical skin closure.
+            </p>
+          </div>
+          <Image
+            src="/images/products/original-applicator.webp"
+            alt="Authentic original SkinSeal applicator from the company catalogue"
+            width={2419}
+            height={451}
+            sizes="(max-width:760px) 90vw,50vw"
+          />
+        </div>
+      </section>
       <section className="section">
         <div className="container intro-grid">
           <div className="intro-photo">

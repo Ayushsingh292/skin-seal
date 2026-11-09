@@ -71,6 +71,12 @@ export function Navigation() {
   }
   return (
     <header className="site-header">
+      <div className="nav-utility">
+        <div className="container">
+          <span>ADVANCED TOPICAL SKIN ADHESIVES · FOR PROFESSIONAL USE</span>
+          <a href="tel:+918376823209">+91 837 682 3209</a>
+        </div>
+      </div>
       <div className="nav-wrap container">
         <Link
           className="brand"
@@ -130,16 +136,29 @@ export function Navigation() {
                       }
                     }}
                   >
-                    {products.map((p) => (
-                      <Link
-                        href={`/products/${p.slug}`}
-                        key={p.slug}
-                        onClick={() => setSub(false)}
-                      >
-                        <strong>{p.name}</strong>
-                        <span>{p.label}</span>
+                    <div className="megamenu-intro">
+                      <span>The SkinSeal portfolio</span>
+                      <h2>
+                        A considered choice
+                        <br />
+                        for your practice.
+                      </h2>
+                      <Link href="/products" onClick={() => setSub(false)}>
+                        Compare the complete range <ArrowUpRight size={19} />
                       </Link>
-                    ))}
+                    </div>
+                    <div className="megamenu-grid">
+                      {products.map((p) => (
+                        <Link
+                          href={`/products/${p.slug}`}
+                          key={p.slug}
+                          onClick={() => setSub(false)}
+                        >
+                          <strong>{p.name}</strong>
+                          <span>{p.composition}</span>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

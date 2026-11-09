@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowUpRight,
   ArrowRight,
+  ArrowUpRight,
+  ArrowDown,
   ShieldCheck,
-  Droplet,
-  PackageCheck,
-  MoveDown,
+  Plus,
 } from "lucide-react";
 import {
   ApplicationGrid,
@@ -15,10 +14,10 @@ import {
   Eyebrow,
   FAQ,
   Process,
-  ProductGrid,
   ResourceCards,
   SectionHeading,
 } from "@/components/shared";
+import { ProductCatalogue } from "@/components/product-catalogue";
 import { VideoGallery } from "@/components/video-gallery";
 import { pageMetadata } from "@/lib/metadata";
 export const metadata = pageMetadata(
@@ -32,7 +31,7 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <Eyebrow>Precision in closure. Confidence in care.</Eyebrow>
+            <Eyebrow>SkinSeal / Topical skin adhesives</Eyebrow>
             <h1>
               Advanced
               <br />
@@ -47,270 +46,237 @@ export default function Home() {
               closure.
             </p>
             <div className="button-row">
-              <Link href="/products" className="button">
-                Explore Products <ArrowUpRight size={18} />
+              <Link href="/products" className="button bright">
+                Explore Products <ArrowUpRight size={19} />
               </Link>
-              <Link href="/contact" className="button outline">
-                Enquire Now <ArrowRight size={18} />
+              <Link href="/contact" className="button outline-light">
+                Enquire Now <ArrowRight size={19} />
               </Link>
             </div>
-            <div className="hero-footnote">
-              <ShieldCheck size={17} />
-              <span>Designed for healthcare professionals</span>
-            </div>
+            <p className="hero-footnote">
+              <ShieldCheck size={16} />
+              For healthcare professionals. Guided by clinical judgement.
+            </p>
           </div>
-          <div className="hero-visual">
-            <span className="hero-orbit orbit-one" />
-            <span className="hero-orbit orbit-two" />
-            <div className="visual-caption">
-              <span className="live-dot" /> THE SKINSEAL ADVANTAGE
+          <div className="hero-stage">
+            <div className="stage-top">
+              <span>01 / The original SkinSeal</span>
+              <Plus size={20} strokeWidth={1} />
             </div>
-            <div className="floating-label">
-              <span className="icon-box">
-                <Droplet size={20} />
-              </span>
-              <span>
-                Topical skin adhesive
-                <strong>Precision. In every application.</strong>
-              </span>
+            <div className="stage-title">
+              <span>Purposeful technology.</span>
+              <strong>In the details.</strong>
             </div>
-            <div className="hero-product">
-              <Image
-                src="/images/products/skinseal.webp"
-                alt="Authentic SkinSeal N-Butyl-2-Cyanoacrylate 0.25 mL product packaging"
-                width={1193}
-                height={595}
-                sizes="(max-width: 800px) 95vw, 50vw"
-                preload
-              />
-            </div>
-            <div className="hero-product-caption">
-              <span>SKINSEAL</span>
-              <span>N-Butyl-2-Cyanoacrylate</span>
-            </div>
-            <div className="visual-bottom">
-              <span className="visual-cross">+</span>
-              <p>
-                Thoughtful technology.
-                <br />
-                <strong>A simpler approach to skin closure.</strong>
-              </p>
-              <ArrowUpRight size={24} />
-            </div>
-          </div>
-        </div>
-        <div className="hero-scroll container">
-          <span>THE SCIENCE OF A SIMPLER CLOSURE</span>
-          <a href="#introduction" aria-label="Discover SkinSeal">
-            <MoveDown size={18} />
-          </a>
-          <span>01 — DISCOVER SKINSEAL</span>
-        </div>
-      </section>
-      <div className="trust-strip">
-        <div className="container">
-          <span>
-            <ShieldCheck />
-            Professional use
-          </span>
-          <span>
-            <Droplet />
-            Topical application
-          </span>
-          <span>
-            <PackageCheck />
-            Sterile & single-use*
-          </span>
-          <span>
-            <span className="mini-cross">+</span>Multiple formulations
-          </span>
-        </div>
-      </div>
-      <section className="section" id="introduction">
-        <div className="container intro-grid">
-          <div className="intro-photo">
             <Image
-              src="/images/applications/surgical.webp"
-              alt="Representative photograph of healthcare professionals in an operating theatre"
-              fill
-              sizes="(max-width: 800px) 90vw, 45vw"
+              className="hero-pack"
+              src="/images/products/skinseal.webp"
+              alt="Original SkinSeal N-Butyl-2-Cyanoacrylate 0.25 mL carton"
+              width={1193}
+              height={595}
+              sizes="(max-width:760px) 88vw, 44vw"
+              preload
             />
-            <div className="photo-caption">
-              <span className="caption-line" />
-              Built around the needs of modern care.
+            <div className="stage-applicator">
+              <Image
+                src="/images/products/original-applicator.webp"
+                alt="Authentic original SkinSeal applicator from the supplied product catalogue"
+                width={2419}
+                height={451}
+                sizes="(max-width:760px) 85vw, 42vw"
+              />
+              <span className="applicator-rule" />
+              <span className="applicator-label">
+                Original SkinSeal applicator
+              </span>
+            </div>
+            <div className="stage-bottom">
+              <span>N-Butyl-2-Cyanoacrylate</span>
+              <span>0.25 / 0.50 mL</span>
             </div>
           </div>
-          <div className="intro-copy">
-            <Eyebrow>Meet SkinSeal</Eyebrow>
+        </div>
+        <div className="hero-bottom container">
+          <a href="#introduction">
+            <ArrowDown size={18} />
+            Discover the SkinSeal approach
+          </a>
+          <span>
+            Medical <i /> Dental <i /> Veterinary
+          </span>
+          <span>Made for professional practice.</span>
+        </div>
+      </section>
+      <section id="introduction" className="section brand-story">
+        <div className="container">
+          <div className="story-heading">
+            <Eyebrow>01 / A considered approach</Eyebrow>
             <h2>
-              Small application.
+              Skin closure is a detail.
               <br />
-              <span className="text-teal">Meaningful purpose.</span>
+              <span>Care is the bigger picture.</span>
             </h2>
-            <p className="lead">
-              A considered approach to topical skin closure.
-            </p>
-            <p>
-              SkinSeal brings together a range of cyanoacrylate-based topical
-              skin adhesives for professional practice. Applied externally in
-              appropriately selected cases, the adhesive forms a polymer film
-              over approximated skin edges.
-            </p>
-            <p>
-              Marketed in India by Asepsis Marketing, the range includes
-              medical, dental and veterinary product families—so the
-              conversation starts with the needs of your practice.
-            </p>
-            <Link className="text-link" href="/about">
-              Get to know SkinSeal <ArrowUpRight size={18} />
-            </Link>
-            <small className="photo-credit">
-              Representative stock photography. No SkinSeal use or endorsement
-              implied.
-            </small>
+          </div>
+          <div className="story-composition">
+            <div className="story-manifesto">
+              <span className="story-cross" aria-hidden="true">
+                +
+              </span>
+              <p className="lead">
+                A small application.
+                <br />A clear purpose.
+              </p>
+              <p>
+                SkinSeal brings together cyanoacrylate-based topical adhesives
+                for professional practice. Applied externally in suitable cases,
+                the adhesive forms a polymer film over approximated skin edges.
+              </p>
+              <p>
+                From the original formulation to dedicated dental and veterinary
+                ranges, product selection begins with the needs of your
+                practice.
+              </p>
+              <Link className="text-link" href="/about">
+                The story behind SkinSeal <ArrowUpRight size={20} />
+              </Link>
+              <span className="story-company">
+                Marketed in India by Asepsis Marketing
+              </span>
+            </div>
+            <div className="story-image">
+              <Image
+                src="/images/applications/surgical.webp"
+                alt="Representative photograph of a surgical professional at work"
+                fill
+                sizes="(max-width:760px) 90vw,55vw"
+              />
+              <div className="story-image-caption">
+                <span>
+                  Professional care.
+                  <br />
+                  An informed approach.
+                </span>
+                <span>Representative photography</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <section className="section soft-bg">
+      <section className="section portfolio-section" id="portfolio">
         <div className="container">
           <SectionHeading
-            label="Our product portfolio"
-            title="One family. Purposeful possibilities."
-            description="Explore formulations and dedicated ranges for professional care."
+            label="02 / The product portfolio"
+            title="The right formulation. A considered choice."
+            description="Four medical formulations. Dedicated dental and veterinary ranges. Explore the details that make each family distinct."
             href="/products"
-            link="Discover the range"
+            link="View the full catalogue"
           />
-          <ProductGrid />
+          <ProductCatalogue />
           <p className="section-note">
-            Product selection is subject to the exact variant’s Instructions for
-            Use. Confirm current sizes and availability with our team.
+            Confirm current availability and consult the exact variant’s
+            Instructions for Use. Formulation presentations are not packaging
+            illustrations.
           </p>
         </div>
       </section>
-      <section className="section">
-        <div className="container">
-          <SectionHeading
-            label="Why SkinSeal"
-            title="Considered details. Practical design."
-            description="A topical approach, with the professional in mind."
-            href="/why-skinseal"
-            link="Explore the approach"
-          />
+      <section className="section principle-section">
+        <div className="container principle-layout">
+          <div className="principle-heading">
+            <Eyebrow>03 / Why SkinSeal</Eyebrow>
+            <h2>
+              Designed around
+              <br />
+              the way
+              <br />
+              <em>professionals care.</em>
+            </h2>
+            <p>
+              Practical considerations. Clear product information. Clinical
+              judgement at the centre.
+            </p>
+            <Link className="text-link" href="/why-skinseal">
+              Explore the SkinSeal approach <ArrowUpRight size={19} />
+            </Link>
+          </div>
           <BenefitGrid />
-          <p className="section-note">
-            *Sterility and single-use information refer to the SkinSeal source
-            product insert. Check the packaging of each variant.
-          </p>
         </div>
       </section>
       <section className="section applications-section">
         <div className="container">
           <SectionHeading
-            label="Clinical applications"
-            title="Different settings. The same care."
-            description="Explore areas of professional practice where an appropriately selected formulation may be considered."
+            label="04 / Areas of practice"
+            title="Different disciplines. A shared attention to care."
+            description="Explore clinical settings and dedicated product ranges. Suitability is always product- and case-specific."
             href="/applications"
-            link="View all applications"
+            link="Explore applications"
           />
-          <ApplicationGrid limit={6} />
-          <div className="application-bottom">
-            <p>
-              Representative stock photographs, not SkinSeal procedures or
-              clinical outcomes.
-            </p>
-            <Link href="/applications#veterinary" className="text-link">
-              Explore veterinary applications <ArrowUpRight size={17} />
-            </Link>
-          </div>
+          <ApplicationGrid />
+          <p className="section-note">
+            Representative stock photographs. No SkinSeal treatment, outcome or
+            endorsement is depicted.
+          </p>
         </div>
       </section>
-      <section className="section">
+      <section className="cinema-section">
         <div className="container">
-          <SectionHeading
-            label="In focus"
-            title="A closer look at SkinSeal."
-            description="Product demonstrations and professional learning, guided by the right information."
-          />
+          <div className="cinema-heading">
+            <Eyebrow>05 / SkinSeal in focus</Eyebrow>
+            <span>Product knowledge / Professional learning</span>
+          </div>
           <VideoGallery />
         </div>
       </section>
       <section className="section process-section">
         <div className="container">
           <SectionHeading
-            label="The closure journey"
-            title="Five stages. One considered process."
-            description="An overview for professional awareness—not a substitute for the product’s Instructions for Use."
+            label="06 / The closure journey"
+            title="From preparation to aftercare."
+            description="Five stages to understand the topical approach. Explore each stage for a high-level professional overview."
           />
           <Process />
           <p className="section-note">
-            Timing, preparation, indications and aftercare vary by product.
-            Always consult the current product insert.
+            This overview does not replace the product’s Instructions for Use.
+            Timing, indications, preparation and aftercare are product-specific.
           </p>
         </div>
       </section>
-      <section className="section">
-        <div className="container experiences-teaser">
-          <div>
-            <Eyebrow>Clinical experiences</Eyebrow>
+      <section className="section resource-section">
+        <div className="container resource-editorial">
+          <div className="resource-intro">
+            <Eyebrow>07 / The knowledge library</Eyebrow>
             <h2>
-              Real experiences.
+              Informed choices
               <br />
-              Responsible sharing.
+              start with
+              <br />
+              <span>clear information.</span>
             </h2>
             <p>
-              We believe clinical stories should be shared with permission and
-              context. Ask our team about available professional experience
-              materials.
+              Find product catalogues, application guides and Instructions for
+              Use. Request current documents from our team.
             </p>
-            <Link className="text-link" href="/clinical-experiences">
-              Explore clinical learning <ArrowUpRight size={18} />
+            <Link className="text-link" href="/resources">
+              Visit the resource library <ArrowUpRight size={20} />
             </Link>
           </div>
-          <div className="experience-quote">
-            <span className="quote-mark" aria-hidden="true">
-              “
-            </span>
-            <h3>
-              Good information is
-              <br />
-              part of good care.
-            </h3>
-            <p>
-              Verified content. Appropriate consent.
-              <br />A professional perspective.
-            </p>
-            <span className="brand-statement">THE SKINSEAL APPROACH</span>
-          </div>
-        </div>
-      </section>
-      <section className="section soft-bg">
-        <div className="container">
-          <SectionHeading
-            label="The resource centre"
-            title="Information for informed decisions."
-            description="Request the latest product documentation directly from our team."
-            href="/resources"
-            link="Explore resources"
-          />
           <ResourceCards limit={3} />
         </div>
       </section>
       <section className="section">
         <div className="container faq-grid">
           <div>
-            <Eyebrow>A little more clarity</Eyebrow>
+            <Eyebrow>08 / A little more clarity</Eyebrow>
             <h2>
-              Your questions.
+              Good questions.
               <br />
               Considered answers.
             </h2>
             <p>
-              Need something more specific?
+              Looking for product-specific information?
               <br />
-              Our team is here to help.
+              Let’s start a conversation.
             </p>
             <Link className="text-link" href="/contact">
-              Talk to us <ArrowUpRight size={18} />
+              Talk to the SkinSeal team <ArrowUpRight size={19} />
             </Link>
           </div>
           <FAQ />
