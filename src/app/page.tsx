@@ -1,12 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ArrowDown,
-  ShieldCheck,
-  Plus,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ArrowDown, ShieldCheck } from "lucide-react";
 import {
   ApplicationGrid,
   BenefitGrid,
@@ -58,15 +52,10 @@ export default function Home() {
               For healthcare professionals. Guided by clinical judgement.
             </p>
           </div>
-          <div className="hero-stage">
-            <div className="stage-top">
-              <span>01 / The original SkinSeal</span>
-              <Plus size={20} strokeWidth={1} />
-            </div>
-            <div className="stage-title">
-              <span>Purposeful technology.</span>
-              <strong>In the details.</strong>
-            </div>
+          <div className="hero-stage hero-showcase">
+            <span className="showcase-wordmark" aria-hidden="true">
+              SkinSeal
+            </span>
             <Image
               className="hero-pack"
               src="/images/products/skinseal.webp"
@@ -84,14 +73,13 @@ export default function Home() {
                 height={451}
                 sizes="(max-width:760px) 85vw, 42vw"
               />
-              <span className="applicator-rule" />
-              <span className="applicator-label">
-                Original SkinSeal applicator
-              </span>
             </div>
-            <div className="stage-bottom">
-              <span>N-Butyl-2-Cyanoacrylate</span>
-              <span>0.25 / 0.50 mL</span>
+            <div className="showcase-caption">
+              <div>
+                <strong>The original SkinSeal.</strong>
+                <span>Topical skin adhesive</span>
+              </div>
+              <span>0.25 mL pack shown</span>
             </div>
           </div>
         </div>
@@ -185,8 +173,7 @@ export default function Home() {
             <h2>
               Designed around
               <br />
-              the way
-              <br />
+              the way <br />
               <em>professionals care.</em>
             </h2>
             <p>

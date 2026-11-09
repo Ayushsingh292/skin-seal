@@ -5,6 +5,7 @@ export const applications = [
     description:
       "Selected superficial skin incisions, following clinical assessment and appropriate closure of deeper layers.",
     image: "surgical",
+    position: "50% 30%",
     alt: "Surgeons working in an operating theatre",
   },
   {
@@ -13,6 +14,7 @@ export const applications = [
     description:
       "Clean, appropriately selected superficial wounds assessed by a qualified healthcare professional.",
     image: "minor-cuts-care",
+    position: "50% 56%",
     alt: "Healthcare professional bandaging a hand in a representative wound-care setting",
   },
   {
@@ -21,6 +23,7 @@ export const applications = [
     description:
       "Selected procedures where the clinician considers topical skin closure appropriate.",
     image: "paediatric",
+    position: "50% 45%",
     alt: "A child receiving professional dental care in a clinical setting",
   },
   {
@@ -29,6 +32,7 @@ export const applications = [
     description:
       "Selected superficial procedures, with suitability determined by the treating clinician.",
     image: "dermatology",
+    position: "50% 47%",
     alt: "Professional carrying out a skin care procedure",
   },
   {
@@ -37,6 +41,7 @@ export const applications = [
     description:
       "Selected wounds after assessment, cleaning and management by the treating team.",
     image: "emergency",
+    position: "50% 40%",
     alt: "A professional hospital care environment",
   },
   {
@@ -45,6 +50,7 @@ export const applications = [
     description:
       "Dedicated dental variants. Request the specific product documentation for indications and limitations.",
     image: "dental",
+    position: "50% 42%",
     alt: "Dentist providing treatment in a dental clinic",
   },
   {
@@ -53,6 +59,7 @@ export const applications = [
     description:
       "A dedicated veterinary range for use by veterinary professionals, according to its product documentation.",
     image: "veterinary",
+    position: "50% 55%",
     alt: "Veterinary team examining a dog",
   },
 ];

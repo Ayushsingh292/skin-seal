@@ -1,0 +1,728 @@
+/* Focused polish of the existing editorial system. Palette, typography and routes stay intact. */
+@media (min-width: 1024px) and (max-width: 1179px) {
+  .site-header .desktop-nav {
+    display: flex;
+    gap: 13px;
+    font-size: 10px;
+  }
+  .site-header .menu-toggle {
+    display: none;
+  }
+  .site-header .nav-wrap {
+    gap: 15px;
+  }
+  .site-header .brand {
+    width: 82px;
+  }
+  .site-header .brand img {
+    width: 80px;
+    height: 65px;
+  }
+  .site-header .nav-cta {
+    margin-left: 0;
+    gap: 14px;
+    padding: 11px 14px;
+    font-size: 10px;
+  }
+  .site-header .desktop-nav > a,
+  .site-header .nav-product > a {
+    padding: 25px 0;
+  }
+  .site-header .megamenu-intro {
+    padding: 28px;
+  }
+  .site-header .megamenu-intro h2 {
+    font-size: 27px;
+  }
+}
+.product-dropdown {
+  animation: refinement-menu-in 0.18s ease both;
+}
+.hero .hero-showcase {
+  isolation: isolate;
+  justify-content: center;
+  min-height: 565px;
+  padding: 70px 30px 78px;
+  background: radial-gradient(
+    ellipse at 65% 35%,
+    #fff 0%,
+    #e6eff0 65%,
+    #d8e8eb 100%
+  );
+  border-radius: 3px;
+}
+.hero-showcase .showcase-wordmark {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+  color: #c2dce3;
+  font-family: var(--font-heading);
+  font-size: 76px;
+  line-height: 1.1;
+  letter-spacing: -0.065em;
+  font-weight: 500;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero .hero-showcase .hero-pack {
+  width: 88%;
+  max-height: 255px;
+  object-fit: contain;
+  align-self: center;
+  margin: 0 0 24px;
+  filter: drop-shadow(0 16px 12px #193f4a16);
+  animation: refinement-product-in 0.6s ease both;
+}
+.hero .hero-showcase .stage-applicator {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  filter: drop-shadow(0 10px 8px #143e4912);
+  animation: refinement-product-in 0.8s ease both;
+}
+.hero-showcase .showcase-caption {
+  position: static;
+  margin-top: 24px;
+  width: 100%;
+  flex-shrink: 0;
+  bottom: 24px;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  color: #3b5e6e;
+}
+.showcase-caption > div > strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.showcase-caption > div > span {
+  display: block;
+  line-height: 1.5;
+  font-size: 10px;
+}
+.showcase-caption > span {
+  font-size: 8px;
+  max-width: 90px;
+  text-align: right;
+  line-height: 1.7;
+}
+/* Preserve the stable interactive catalogue while clarifying its active state. */
+.formulation-tabs button {
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.formulation-tabs button:hover {
+  background: #e1edf0;
+}
+.formulation-tabs button[aria-selected="true"] {
+  background: #ffffff85;
+}
+.formulation-tabs button[aria-selected="true"] .formula-tab-number {
+  font-weight: 700;
+  color: var(--teal);
+}
+.formula-panel-status {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  min-height: 58px;
+  margin-bottom: 12px;
+  padding: 0 5px;
+}
+.formula-panel-status > span {
+  flex-shrink: 0;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  color: var(--teal);
+  border-right: 1px solid #b0c6d0;
+  padding-right: 15px;
+}
+.formula-panel-status > p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 450px;
+}
+.formulation-panel .formula-panel-copy h3 {
+  font-weight: 600;
+}
+.formulation-panel .formula-panel-copy > .button:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+@media (min-width: 760px) {
+  .formulation-panel .pack-shot {
+    max-height: calc(var(--gallery-height) * 0.68);
+  }
+  .formulation-panel .applicator-shot {
+    height: 44px;
+    min-height: 44px;
+    margin: 8px 0 10px;
+  }
+  .formulation-panel .artwork-footer {
+    font-size: 9px;
+  }
+}
+/* A single product reference and an icon-led benefit index replace the long text list. */
+.principle-layout {
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: 65px;
+}
+.principle-layout .benefit-visual-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+}
+.benefit-product {
+  position: relative;
+  min-width: 0;
+  align-self: stretch;
+  background: #d6e6eb;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.benefit-emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f5fafb;
+  color: var(--teal);
+  margin-bottom: 24px;
+}
+.benefit-product h3 {
+  font-size: 35px;
+  line-height: 1.15;
+  color: var(--navy);
+  margin-bottom: 32px;
+}
+.benefit-product > img {
+  width: 100%;
+  mix-blend-mode: multiply;
+  margin-bottom: 28px;
+}
+.benefit-product-label {
+  border-top: 1px solid #a6c4d0;
+  padding-top: 17px;
+}
+.benefit-product-label > span {
+  font-size: 10px;
+  color: #3c6070;
+}
+.benefit-product-label > p {
+  font-size: 9px;
+  line-height: 1.9;
+  margin-top: 8px;
+  color: #3c6070;
+}
+.benefit-item {
+  border-top: 1px solid #abc5d0;
+}
+.benefit-item:last-child {
+  border-bottom: 1px solid #abc5d0;
+}
+.benefit-item summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  min-height: 70px;
+  padding: 17px 0;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+}
+.benefit-item summary::-webkit-details-marker {
+  display: none;
+}
+.benefit-item summary > svg:first-child {
+  color: var(--teal);
+}
+.benefit-item summary > span {
+  flex: 1;
+}
+.benefit-disclosure {
+  color: var(--teal);
+  transition: rotate 0.2s;
+}
+.benefit-item[open] .benefit-disclosure {
+  rotate: 45deg;
+}
+.benefit-item > p {
+  font-size: 11px;
+  line-height: 1.9;
+  margin: 0 5px 20px 33px;
+  color: #3f6071;
+}
+.benefit-item summary:hover {
+  color: var(--teal);
+}
+/* Keep the application mosaic, with deliberate crops and stronger affordances. */
+.application-card:after {
+  background: linear-gradient(
+    180deg,
+    transparent 12%,
+    #0b253540 45%,
+    #0b2535ed 100%
+  );
+}
+.application-card .application-number {
+  font-size: 8px;
+}
+.application-card:hover .application-overlay > svg,
+.application-card:focus-visible .application-overlay > svg {
+  translate: 3px -3px;
+}
+.application-card .application-overlay > svg {
+  transition: translate 0.25s;
+}
+.application-card:focus-visible {
+  outline: 3px solid var(--bright);
+  outline-offset: 4px;
+}
+/* Compact progress + product context, retaining the existing keyboard stepper. */
+.closure-journey .journey-tabs > button {
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+.journey-progress {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+.journey-progress > span {
+  flex: 1;
+  height: 3px;
+  background: #cadce3;
+  transition: background 0.25s;
+}
+.journey-progress > span[data-complete="true"] {
+  background: var(--teal);
+}
+.closure-journey .journey-panel {
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 40px;
+  min-height: 0;
+  padding: 28px 0 10px;
+  align-items: stretch;
+}
+.journey-product-context {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #e0ebef;
+  padding: 25px 25px 20px;
+  min-height: 225px;
+}
+.journey-product-context > span {
+  font-size: 9px;
+  letter-spacing: 0.035em;
+  color: #3d6173;
+}
+.journey-product-context > img {
+  width: 100%;
+  mix-blend-mode: multiply;
+  margin: 25px 0;
+}
+.journey-product-context > p {
+  font-size: 10px !important;
+  line-height: 1.8;
+  color: #3d6173;
+}
+.journey-stage-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0;
+}
+.journey-stage-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 17px;
+  color: var(--teal);
+}
+.journey-stage-heading > span {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.journey-panel .journey-stage-copy h3 {
+  font-size: 34px;
+  margin-bottom: 14px;
+}
+.journey-panel .journey-stage-copy > p {
+  font-size: 13px;
+  line-height: 1.9;
+  min-height: 50px;
+  max-width: 490px;
+}
+.journey-stage-copy > .text-link {
+  font-size: 11px;
+  max-width: 280px;
+  margin-top: 20px;
+  border-bottom: 1px solid #afc7d2;
+  padding-bottom: 8px;
+}
+@keyframes refinement-menu-in {
+  from {
+    opacity: 0;
+    translate: 0 -5px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes refinement-product-in {
+  from {
+    translate: 0 6px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@media (min-width: 1600px) {
+  .hero .hero-showcase {
+    min-height: 610px;
+    padding: 85px 38px 85px;
+  }
+  .hero .hero-showcase .hero-pack {
+    max-height: 280px;
+    width: 90%;
+  }
+  .hero-showcase .showcase-wordmark {
+    font-size: 96px;
+  }
+  .principle-layout .benefit-visual-layout {
+    gap: 40px;
+  }
+  .benefit-product {
+    padding: 35px 28px;
+  }
+  .benefit-product h3 {
+    font-size: 44px;
+  }
+  .benefit-item summary {
+    font-size: 20px;
+    min-height: 78px;
+  }
+  .benefit-item > p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1179px) {
+  .principle-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .principle-heading {
+    max-width: 700px;
+  }
+  .principle-layout .benefit-visual-layout {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 40px;
+  }
+  .benefit-product {
+    padding: 28px;
+    min-height: 390px;
+  }
+  .benefit-product > img {
+    max-width: 400px;
+    align-self: center;
+  }
+  .benefit-item summary {
+    font-size: 20px;
+    min-height: 67px;
+  }
+  .benefit-item > p {
+    font-size: 12px;
+  }
+  .hero .hero-showcase {
+    min-height: 480px;
+    padding: 65px 23px 75px;
+  }
+  .hero-showcase .showcase-wordmark {
+    font-size: 58px;
+    left: 24px;
+  }
+  .hero .hero-showcase .hero-pack {
+    width: 100%;
+    max-height: 230px;
+    margin-bottom: 24px;
+  }
+  .showcase-caption > div > strong {
+    font-size: 19px;
+  }
+}
+@media (max-width: 759px) {
+  .hero .hero-showcase {
+    min-height: 340px;
+    padding: 50px 23px 66px;
+  }
+  .hero .hero-showcase .hero-pack {
+    max-height: 210px;
+    width: 85%;
+    margin-bottom: 20px;
+  }
+  .hero .hero-showcase .stage-applicator {
+    width: 96%;
+    align-self: center;
+  }
+  .hero-showcase .showcase-wordmark {
+    font-size: 56px;
+    top: 15px;
+  }
+  .hero-showcase .showcase-caption {
+    bottom: 17px;
+    left: 23px;
+    right: 23px;
+  }
+  .showcase-caption > div > strong {
+    font-size: 20px;
+  }
+  .showcase-caption > div > span {
+    font-size: 9px;
+  }
+  .formula-panel-status {
+    min-height: 57px;
+    margin-bottom: 10px;
+  }
+  .formula-panel-status > p {
+    font-size: 12px;
+  }
+  .principle-layout .benefit-visual-layout {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 25px;
+  }
+  .benefit-product {
+    padding: 23px;
+    min-height: 390px;
+  }
+  .benefit-product h3 {
+    font-size: 32px;
+  }
+  .benefit-item summary {
+    font-size: 18px;
+    gap: 10px;
+  }
+  .benefit-item > p {
+    font-size: 11px;
+    margin-left: 31px;
+  }
+  .application-card .application-number {
+    font-size: 7px;
+    letter-spacing: 0.06em;
+  }
+  .closure-journey .journey-panel {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  .journey-product-context {
+    padding: 20px;
+    min-height: 220px;
+  }
+  .journey-product-context > span {
+    font-size: 8px;
+  }
+  .journey-product-context > p {
+    font-size: 9px !important;
+  }
+  .journey-panel .journey-stage-copy h3 {
+    font-size: 30px;
+  }
+  .journey-panel .journey-stage-copy > p {
+    font-size: 12px;
+    min-height: 0;
+  }
+  .journey-stage-copy > .text-link {
+    font-size: 10px;
+    gap: 12px;
+    margin-top: 17px;
+  }
+}
+@media (max-width: 479px) {
+  .hero .hero-showcase {
+    padding: 48px 18px 63px;
+    min-height: 325px;
+  }
+  .hero .hero-showcase .hero-pack {
+    max-height: 170px;
+    width: 95%;
+    margin-bottom: 19px;
+  }
+  .hero-showcase .showcase-wordmark {
+    font-size: 43px;
+    left: 18px;
+    top: 13px;
+  }
+  .hero-showcase .showcase-caption {
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
+    gap: 14px;
+  }
+  .showcase-caption > div > strong {
+    font-size: 18px;
+  }
+  .showcase-caption > span {
+    font-size: 7px;
+    max-width: 70px;
+  }
+  .showcase-caption > div > span {
+    font-size: 8px;
+  }
+  .formulation-tabs button {
+    padding-left: 9px;
+    padding-right: 5px;
+    gap: 7px;
+  }
+  .formulation-tabs strong {
+    font-size: 19px;
+  }
+  .formulation-tabs button[aria-selected="true"] {
+    background: #fff;
+    border-bottom-color: var(--teal);
+  }
+  .formula-panel-status {
+    padding-inline: 0;
+    gap: 12px;
+  }
+  .formula-panel-status > span {
+    font-size: 9px;
+    padding-right: 12px;
+  }
+  .formula-panel-status > p {
+    font-size: 11px;
+  }
+  .principle-layout .benefit-visual-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .benefit-product {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 15px 18px;
+    min-height: 0;
+    padding: 22px;
+  }
+  .benefit-emblem {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .benefit-emblem > svg {
+    width: 30px;
+    height: 30px;
+  }
+  .benefit-product h3 {
+    font-size: 27px;
+    grid-column: 2;
+    grid-row: 1;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .benefit-product h3 > br {
+    display: none;
+  }
+  .benefit-product > img {
+    grid-column: 1/-1;
+    margin: 9px 0;
+  }
+  .benefit-product-label {
+    grid-column: 1/-1;
+    padding-top: 12px;
+  }
+  .benefit-product-label > span {
+    font-size: 10px;
+  }
+  .benefit-product-label > p {
+    font-size: 9px;
+    margin-top: 5px;
+  }
+  .benefit-item summary {
+    font-size: 18px;
+    min-height: 64px;
+  }
+  .benefit-item > p {
+    font-size: 12px;
+    margin-left: 33px;
+  }
+  .closure-journey .journey-tabs > button {
+    padding: 14px 16px;
+  }
+  .closure-journey .journey-panel {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-top: 22px;
+  }
+  .journey-product-context {
+    min-height: 0;
+    padding: 18px 20px;
+  }
+  .journey-product-context > img {
+    margin: 18px 0;
+    max-height: 72px;
+    object-fit: contain;
+  }
+  .journey-product-context > p {
+    font-size: 9px !important;
+  }
+  .journey-stage-copy {
+    padding: 0 3px;
+  }
+  .journey-stage-heading {
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  .journey-stage-heading > svg {
+    width: 24px;
+    height: 24px;
+  }
+  .journey-stage-heading > span {
+    font-size: 9px;
+  }
+  .journey-panel .journey-stage-copy h3 {
+    font-size: 30px;
+    margin-bottom: 13px;
+  }
+  .journey-panel .journey-stage-copy > p {
+    font-size: 12px;
+  }
+  .journey-stage-copy > .text-link {
+    font-size: 11px;
+    margin-top: 16px;
+    max-width: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-showcase img,
+  .hero-showcase .stage-applicator,
+  .product-dropdown {
+    animation: none !important;
+  }
+}
+/* In-flow captions reserve their own space at every width, including during entrance motion. */
+.hero .hero-showcase {
+  padding-bottom: 26px;
+}

@@ -7,15 +7,15 @@ import {
   Mail,
   Phone,
   MapPin,
-  Plus,
 } from "lucide-react";
 import { products, type Product } from "@/data/products";
 import { applications } from "@/data/applications";
-import { benefits, navigation, site, faqs } from "@/data/site";
+import { navigation, site, faqs } from "@/data/site";
 import { documents } from "@/data/media";
 import { ProductVisual } from "./product-visual";
 import { ClosureJourney } from "./closure-journey";
 import { ResourceRows } from "./resource-library";
+import { BenefitShowcase } from "./benefit-showcase";
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <p className="eyebrow">
@@ -145,10 +145,13 @@ export function ApplicationGrid({ limit }: { limit?: number }) {
             src={`/images/applications/${a.image}.webp`}
             alt={a.alt}
             fill
+            style={{ objectPosition: a.position }}
             sizes={
               i === 0
                 ? "(max-width:760px) 90vw, 50vw"
-                : "(max-width:760px) 45vw, 30vw"
+                : i >= 5
+                  ? "(max-width:760px) 45vw, 50vw"
+                  : "(max-width:760px) 45vw, 25vw"
             }
           />
           <div className="application-overlay">
@@ -171,20 +174,7 @@ export function ApplicationGrid({ limit }: { limit?: number }) {
   );
 }
 export function BenefitGrid() {
-  return (
-    <div className="benefit-grid">
-      {benefits.map((b, i) => (
-        <article className="benefit" key={b.title}>
-          <span>0{i + 1}</span>
-          <div>
-            <h3>{b.title}</h3>
-            <p>{b.text}</p>
-          </div>
-          <Plus size={19} strokeWidth={1} />
-        </article>
-      ))}
-    </div>
-  );
+  return <BenefitShowcase />;
 }
 export function Process() {
   return <ClosureJourney />;

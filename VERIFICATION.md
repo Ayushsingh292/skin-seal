@@ -6,13 +6,13 @@ Verified locally on 9 November 2026, Windows, Node 22.16.0 / npm 10.9.2. No host
 
 | Check | Result |
 |---|---|
-| `npm install motion` | Passed; Motion for React added to the existing stack |
-| `npm run dev` | Started successfully; redesigned homepage served on port 3000 |
+| Dependencies | Existing stack/lockfile preserved; no dependency changes in the final refinement |
+| Local servers | Existing user-owned dev server reused at 3000; separate production QA at 3002 |
 | `npm run lint` | Passed, no lint errors |
 | `npm run typecheck` | Passed |
 | `npm test` | 9/9 validation and API tests passed |
 | `npm run build` | Passed, all requested routes generated |
-| `npm run test:e2e` | 16/16 browser checks passed, final production run 37.0 seconds |
+| `npm run test:e2e` | 21/21 browser checks passed, final production run 37.2 seconds |
 | `git diff --check` | Passed; only Git line-ending normalization notices |
 | Original source integrity | All 17 `items/` files match checkpoint SHA-256 hashes |
 
@@ -28,20 +28,22 @@ Form tests cover client errors and consent, query-based product selection, retai
 
 ## Measured Lighthouse result
 
-Redesigned production homepage on localhost, Lighthouse 12.8.2, Headless Chromium 158, mobile form factor, simulated throttling. Final recorded report: `.recovery/redesign/lighthouse-final.json`.
+Refined production homepage on localhost:3002, Lighthouse 12.8.2, Headless Chromium 158, mobile form factor, simulated throttling. Final recorded report: `.recovery/refinement/lighthouse-final.json`.
 
 | Category | Measured score |
 |---|---:|
-| Performance | 92 |
+| Performance | 91 |
 | Accessibility | 100 |
 | Best Practices | 100 |
 | SEO | 69 |
 
-FCP 0.9 s; LCP 3.3 s; Total Blocking Time 60 ms; CLS 0; Speed Index 0.9 s. These are local lab results from the final measured run, not field performance guarantees. The sole failed SEO audit is intentional crawl blocking (`noindex, nofollow` and robots disallow) while company content and legal drafts await approval. No claim is made that the SEO target of 95 has been reached.
+FCP 0.9 s; LCP 3.3 s; Total Blocking Time 130 ms; CLS 0; Speed Index 1.1 s. These are local lab results from the final measured run, not field performance guarantees. The sole failed SEO audit is intentional crawl blocking (`noindex, nofollow` and robots disallow) while company content and legal drafts await approval. No claim is made that the SEO target of 95 has been reached.
 
 Runtime dependency audit: zero reported vulnerabilities in the production dependency set. Full development audit reports eight moderate advisories in the ESLint/typescript-eslint/minimatch toolchain. No incompatible automatic downgrade or forced dependency repair was performed.
 
 ## Independent review
+
+Final refinement review identified an overlapping mobile hero caption, now corrected by keeping the caption in normal flow. A failing test reproduced the overlap; final tests confirm clearance at all nine requested widths. Another regression check reproduced an expanded mobile Products menu carrying into desktop; resizing now closes menus and restores focus. All five new refinement checks pass. See `REFINEMENT_REPORT.md` for current modified files and screenshots.
 
 A separate reviewer inspected the editorial redesign, product data, ARIA relationships, menu focus handling and publication gates. Targeted browser probes covered home, products, resources and dental detail at 320/768/1180/1920px. No actionable findings, overflow, browser errors or publication bypasses were reported. The existing validated enquiry backend was preserved. The documented trusted-proxy and per-process rate-limit deployment constraints remain.
 

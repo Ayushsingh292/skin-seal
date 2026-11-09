@@ -4,6 +4,7 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/shared";
 import { site } from "@/data/site";
 import "./globals.css";
+import "./refinements.css";
 const inter = localFont({
   src: "../../public/fonts/inter.woff2",
   weight: "400 800",

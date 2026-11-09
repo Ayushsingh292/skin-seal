@@ -34,6 +34,7 @@ export default function Applications() {
                     src={`/images/applications/${a.image}.webp`}
                     alt={a.alt}
                     fill
+                    style={{ objectPosition: a.position }}
                     sizes="(max-width:800px) 90vw,40vw"
                   />
                 </div>

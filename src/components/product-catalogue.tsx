@@ -88,6 +88,10 @@ export function ProductCatalogue() {
           aria-labelledby={`formula-tab-${product.slug}`}
           tabIndex={0}
         >
+          <div className="formula-panel-status">
+            <span>0{selected + 1} / 04</span>
+            <p>{product.composition}</p>
+          </div>
           <m.div
             key={product.slug}
             initial={reduce ? false : { x: 12 }}

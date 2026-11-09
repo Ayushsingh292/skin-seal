@@ -54,9 +54,22 @@ export function Navigation() {
       }
     }
     document.addEventListener("keydown", keyboard);
-    const query = window.matchMedia("(min-width: 1180px)");
+    const query = window.matchMedia("(min-width: 1024px)");
     const resize = () => {
-      if (query.matches) setOpen(false);
+      if (query.matches) {
+        const restoreFocus =
+          panel.current?.contains(document.activeElement) ||
+          document.activeElement === trigger.current;
+        setOpen(false);
+        setSub(false);
+        if (restoreFocus) {
+          const nav = document.querySelector<HTMLElement>(".desktop-nav");
+          (
+            nav?.querySelector<HTMLElement>('[aria-current="page"]') ||
+            nav?.querySelector<HTMLElement>("a")
+          )?.focus();
+        }
+      }
     };
     query.addEventListener("change", resize);
     return () => {

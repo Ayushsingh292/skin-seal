@@ -161,10 +161,10 @@ test("product filters and FAQ operate by keyboard", async ({ page }) => {
     "SkinSeal Veterinary Range",
   );
   await page.goto("/");
-  const faq = page.locator("summary").first();
+  const faq = page.locator(".faq-list summary").first();
   await faq.focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator("details").first()).toHaveAttribute("open", "");
+  await expect(page.locator(".faq-list details").first()).toHaveAttribute("open", "");
 });
 test("form validates fields and does not fake delivery when credentials are missing", async ({
   page,

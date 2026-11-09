@@ -38,6 +38,8 @@ No clinical media/document approval records have been supplied. Company packagin
 
 ## Editorial redesign asset decision
 
+Final refinement: publication status is unchanged after a fresh recursive source inspection. All six benefit descriptions and all five process descriptions are preserved verbatim. New process icons and the applicator image are product context, not clinical application instructions or evidence of outcomes. Source PDFs/videos remain unavailable for public view/download/playback until authorized; no permission was inferred from the request to improve access. The current enquiry delivery configuration requirement remains unchanged.
+
 Reinspected all 17 original files and six representative frames from each video. The original catalogue contains a 2419 × 451-pixel authentic SkinSeal applicator image, now extracted and integrated as product artwork. It depicts no person or patient. Both videos still require full medical/rights review; sampled veterinary frames include a Veo watermark and a synthetic-looking presenter, so they must not be described as genuine clinician experiences without verification. No approval has been inferred from permission to inspect source files.
 
 New interactive catalogue and process copy uses the same conservative, previously sourced facts. The professional-learning section is a demonstration request when no approved media exists; it does not display a false play button. The resource library preserves the real seven-document inventory, search, type filters and request context. Approved entries support View/Download, but none is currently approved.

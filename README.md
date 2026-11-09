@@ -77,7 +77,11 @@ Initial commit: `66b2133` (Create Next App). At task start every tracked file ha
 
 Branch: `skinseal-premium-rebuild`.
 
-Current visual-redesign branch: `skinseal-editorial-redesign`, based on `35fcbfa`. The starting code and uncommitted state were preserved in `../skinseal-editorial-checkpoint-20261109/` with a repository bundle, working-tree patch and source-file hashes. Original `items/` remains untracked and unchanged; no source material was removed. The previous full asset backup remains in the earlier checkpoint.
+Editorial-redesign branch: `skinseal-editorial-redesign`, based on `35fcbfa`. The starting code and uncommitted state were preserved in `../skinseal-editorial-checkpoint-20261109/` with a repository bundle, working-tree patch and source-file hashes. Original `items/` remains untracked and unchanged; no source material was removed. The previous full asset backup remains in the earlier checkpoint.
+
+Current refinement branch: `skinseal-final-refinement`, based on `7a36d8a`. The existing design system and routes are preserved. Refinements cover 1024px desktop navigation, a cleaner product hero, visual/expandable benefits, compact process progress and refined application crops. The checkpoint is `../skinseal-refinement-checkpoint-20261109/`. See [REFINEMENT_REPORT.md](REFINEMENT_REPORT.md) for exact modified files, tests and approval limits.
+
+Playwright accepts `PLAYWRIGHT_BASE_URL` when testing a separate local server, allowing the user's development server to remain running. The default remains `http://localhost:3000`.
 
 Safety checkpoint outside the repository: `../skinseal-safety-20261109/`, containing `repository.bundle`, `working-tree.patch`, `items-sha256.json` and a full `items/` backup. The patch preserves the initial deletions. No reset, clean, force push or environment-file removal was used. Source hashes in the audit allow comparison. Git restore was used only for files verified absent and preserved by that checkpoint.
 

@@ -4,6 +4,9 @@ export default defineConfig({
   timeout: 60000,
   expect: { timeout: 10000 },
   workers: 2,
-  use: { baseURL: "http://localhost:3000", headless: true },
+  use: {
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000",
+    headless: true,
+  },
   reporter: [["list"], ["html", { open: "never" }]],
 });
