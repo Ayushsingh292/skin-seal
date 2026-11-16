@@ -14,17 +14,17 @@ export default function About() {
     <>
       <PageHero
         label="About SkinSeal"
-        title="Thoughtful technology. A human purpose."
-        description="A professional approach to topical skin closure, with product information and clinical judgement at its centre."
+        title="About SkinSeal"
+        description="SkinSeal is a range of topical skin adhesives marketed in India by Asepsis Marketing for medical, dental and veterinary professionals."
       />
       <section className="about-product-band">
         <div className="container">
           <div>
             <Eyebrow>The brand, in focus</Eyebrow>
             <h2>
-              Small in application.
+              Topical skin adhesives.
               <br />
-              Considered in purpose.
+              For professional practice.
             </h2>
             <p>
               The original SkinSeal applicator, reproduced from our supplied
@@ -56,7 +56,7 @@ export default function About() {
             <h2>
               Skin closure.
               <br />
-              Considered differently.
+              The SkinSeal range.
             </h2>
             <p className="lead">Just Seal & Heal.</p>
             <p>
@@ -86,8 +86,8 @@ export default function About() {
       <section className="section soft-bg">
         <div className="container">
           <SectionHeading
-            label="What guides this website"
-            title="Clarity is part of care."
+            label="Our purpose"
+            title="Supporting Professional Practice"
           />
           <div className="editorial-grid">
             <article>
@@ -110,9 +110,7 @@ export default function About() {
               <span>03</span>
               <h3>Responsible communication</h3>
               <p>
-                No invented clinical outcomes, endorsements or testimonials.
-                Clinical media is shared only after appropriate review and
-                permission.
+                Our team provides product information and current documentation to help professionals make informed product selections.
               </p>
             </article>
           </div>
@@ -123,9 +121,9 @@ export default function About() {
           <div>
             <Eyebrow>Our team in India</Eyebrow>
             <h2>
-              A direct connection.
+              Contact Asepsis Marketing.
               <br />
-              An informed conversation.
+              Product & distribution enquiries.
             </h2>
             <p>
               For product information, professional enquiries or distribution

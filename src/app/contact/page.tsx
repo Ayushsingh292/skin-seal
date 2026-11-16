@@ -20,26 +20,26 @@ export default async function Contact({
   const selected = products.find((p) => p.slug === query.product);
   const resource = documents.find((d) => d.id === query.resource);
   const message = resource
-    ? `Please send the current ${resource.title}.`
+    ? selected && resource.id === "insert"
+      ? `Please send the current Instructions for Use for ${selected.name}.`
+      : `Please send the current ${resource.title}.`
     : query.type === "demonstration"
       ? `I would like to request a demonstration${selected ? ` for ${selected.name}` : ""}.`
-      : "";
+      : query.type === "documentation"
+        ? "Please send current product datasheets and variant-specific documentation."
+        : "";
   return (
     <>
       <PageHero
         label="Get in touch"
-        title="Let’s talk about your practice."
+        title="Contact & Product Enquiries"
         description="Product information, professional learning or distribution enquiries—connect directly with the SkinSeal team."
       />
       <section className="section">
         <div className="container contact-layout">
           <aside className="contact-aside">
             <Eyebrow>Here to help</Eyebrow>
-            <h2>
-              A better conversation
-              <br />
-              starts here.
-            </h2>
+            <h2>Contact the SkinSeal Team</h2>
             <p>
               Tell us about your product requirements. Our team can help with
               current product information, documentation and availability.
@@ -85,6 +85,7 @@ export default async function Contact({
             </div>
           </aside>
           <EnquiryForm
+            key={`${selected?.slug ?? "general"}-${resource?.id ?? ""}-${query.type ?? ""}`}
             product={(selected?.slug ?? "general") as EnquiryInput["product"]}
             message={message}
           />

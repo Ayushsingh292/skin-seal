@@ -14,7 +14,7 @@ export default function Applications() {
     <>
       <PageHero
         label="Clinical applications"
-        title="Care takes many forms."
+        title="Clinical Applications"
         description="Explore professional practice settings. Suitability depends on the specific product, the wound, the anatomical site and the treating professional’s assessment."
       />
       <section className="section">

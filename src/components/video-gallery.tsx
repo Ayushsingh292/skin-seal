@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Play, X, ArrowUpRight, Film } from "lucide-react";
 import { publishedVideos, type ClinicalVideo } from "@/data/media";
 
-export function VideoGallery({ product }: { product?: string }) {
+export function VideoGallery({ product, compact = false }: { product?: string; compact?: boolean }) {
   const entries = publishedVideos.filter(
     (v) => !product || v.product === product,
   );
@@ -27,20 +27,18 @@ export function VideoGallery({ product }: { product?: string }) {
   if (!entries.length) return null;
   return (
     <div className="company-film-library">
-      <div className="film-intro">
+      {!compact && <div className="film-intro">
         <div>
           <p className="eyebrow">SkinSeal video collection</p>
           <h2>
-            Meet the range.
-            <br />
-            <span>See the story.</span>
+            SkinSeal Product Videos
           </h2>
         </div>
         <p>
           Get to know SkinSeal through our product videos. Explore the range
           and find information relevant to your practice.
         </p>
-      </div>
+      </div>}
       <div
         className={`video-grid${entries.length === 1 ? " video-grid-single" : ""}`}
       >

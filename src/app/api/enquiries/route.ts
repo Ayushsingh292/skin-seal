@@ -90,7 +90,7 @@ export async function POST(request: Request) {
       },
       503,
     );
-  const { name, email, phone, organization, profession, product, message } =
+  const { name, email, phone, organization, profession, city, product, message } =
     parsed.data;
   try {
     const result = await fetch("https://api.resend.com/emails", {
@@ -104,7 +104,7 @@ export async function POST(request: Request) {
         to: [ENQUIRY_TO_EMAIL],
         reply_to: email,
         subject: `SkinSeal enquiry: ${product}`,
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nOrganization: ${organization}\nProfession: ${profession}\nProduct: ${product}\n\n${message}\n\nConsent to respond: confirmed`,
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nOrganization: ${organization || "Not provided"}\nProfession: ${profession || "Not provided"}\nCity: ${city || "Not provided"}\nProduct: ${product}\n\n${message}\n\nConsent to respond: confirmed`,
       }),
       signal: AbortSignal.timeout(10000),
     });

@@ -6,10 +6,10 @@ test("hero product and caption never overlap at the requested widths", async ({
     await page.setViewportSize({ width, height: 1000 });
     await page.goto("/");
     const product = (await page
-      .locator(".hero-showcase .stage-applicator")
+      .locator(".simple-hero-visual .simple-applicator")
       .boundingBox())!;
     const caption = (await page
-      .locator(".hero-showcase .showcase-caption")
+      .locator(".simple-hero-visual figcaption")
       .boundingBox())!;
     expect(caption.y, `Caption clearance at ${width}px`).toBeGreaterThanOrEqual(
       product.y + product.height + 12,
@@ -24,7 +24,7 @@ test("1024px desktop navigation displays all links without a hamburger or overfl
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "Main navigation" });
   await expect(nav).toBeVisible();
-  await expect(nav.getByRole("link")).toHaveCount(8);
+  await expect(nav.getByRole("link")).toHaveCount(6);
   await expect(
     page.getByRole("button", { name: "Open navigation", exact: true }),
   ).toBeHidden();
@@ -33,8 +33,7 @@ test("1024px desktop navigation displays all links without a hamburger or overfl
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-  await page.getByRole("button", { name: "Open product navigation" }).click();
-  await expect(page.locator(".product-dropdown")).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Products", exact: true })).toHaveAttribute("href", "/products");
 });
 test("mobile menu restores the desktop state when resized to 1024px", async ({
   page,
@@ -77,7 +76,7 @@ test("benefit explanations expand beside authentic product imagery", async ({
 test("closure stages expose progress and genuine product context without a large numeral", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/why-skinseal");
   await page.getByRole("tab", { name: /Seal$/, exact: false }).click();
   const panel = page.getByRole("tabpanel", { name: /Seal$/, exact: false });
   await expect(panel.locator("img")).toHaveCount(1);

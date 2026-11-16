@@ -6,6 +6,7 @@ import { site } from "@/data/site";
 import "./globals.css";
 import "./refinements.css";
 import "./company-media.css";
+import "./simple.css";
 const inter = localFont({
   src: "../../public/fonts/inter.woff2",
   weight: "400 800",
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en-IN" data-scroll-behavior="smooth" className={`${inter.variable} ${manrope.variable}`}>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content

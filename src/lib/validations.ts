@@ -19,7 +19,8 @@ export const enquirySchema = z.object({
       const digits = value.replace(/\D/g, "");
       return digits.length >= 7 && digits.length <= 15;
     }, "Use a phone number with 7 to 15 digits."),
-  organization: singleLine(2, 150),
+  organization: singleLine(0, 150).optional(),
+  city: singleLine(0, 100).optional(),
   profession: z.enum(
     [
       "Healthcare professional",
@@ -27,9 +28,10 @@ export const enquirySchema = z.object({
       "Veterinary professional",
       "Distributor",
       "Other",
+      "",
     ],
     { error: "Select your profession or enquiry type." },
-  ),
+  ).optional(),
   product: z.enum(
     [
       "skinseal",

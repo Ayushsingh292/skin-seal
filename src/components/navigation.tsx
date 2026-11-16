@@ -13,16 +13,6 @@ export function Navigation() {
   const [sub, setSub] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
-  const productTrigger = useRef<HTMLButtonElement>(null);
-  const productMenu = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!sub || open) return;
-    const outside = (event: PointerEvent) => {
-      if (!productMenu.current?.contains(event.target as Node)) setSub(false);
-    };
-    document.addEventListener("pointerdown", outside);
-    return () => document.removeEventListener("pointerdown", outside);
-  }, [sub, open]);
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
@@ -106,88 +96,12 @@ export function Navigation() {
           />
         </Link>
         <nav aria-label="Main navigation" className="desktop-nav">
-          {navigation.map(([name, href]) =>
-            href === "/products" ? (
-              <div
-                className="nav-product"
-                key={href}
-                ref={productMenu}
-                onBlur={(event) => {
-                  if (
-                    !event.currentTarget.contains(event.relatedTarget as Node)
-                  )
-                    setSub(false);
-                }}
-              >
-                <Link
-                  className={pathname.startsWith(href) ? "active" : ""}
-                  href={href}
-                >
-                  Products
-                </Link>
-                <button
-                  ref={productTrigger}
-                  aria-label="Open product navigation"
-                  aria-expanded={sub}
-                  onClick={() => setSub(!sub)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Escape") {
-                      setSub(false);
-                      productTrigger.current?.focus();
-                    }
-                  }}
-                >
-                  <ChevronDown size={13} />
-                </button>
-                {sub && (
-                  <div
-                    className="product-dropdown"
-                    onKeyDown={(e) => {
-                      if (e.key === "Escape") {
-                        setSub(false);
-                        productTrigger.current?.focus();
-                      }
-                    }}
-                  >
-                    <div className="megamenu-intro">
-                      <span>The SkinSeal portfolio</span>
-                      <h2>
-                        A considered choice
-                        <br />
-                        for your practice.
-                      </h2>
-                      <Link href="/products" onClick={() => setSub(false)}>
-                        Compare the complete range <ArrowUpRight size={19} />
-                      </Link>
-                    </div>
-                    <div className="megamenu-grid">
-                      {products.map((p) => (
-                        <Link
-                          href={`/products/${p.slug}`}
-                          key={p.slug}
-                          onClick={() => setSub(false)}
-                        >
-                          <strong>{p.name}</strong>
-                          <span>{p.composition}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                key={href}
-                href={href}
-                className={pathname === href ? "active" : ""}
-                aria-current={pathname === href ? "page" : undefined}
-              >
-                {name}
-              </Link>
-            ),
-          )}
+          {navigation.map(([name, href]) => {
+            const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+            return <Link key={href} href={href} className={active ? "active" : ""} aria-current={active ? "page" : undefined}>{name}</Link>;
+          })}
         </nav>
-        <Link className="button small nav-cta" href="/contact">
+        <Link className="button small nav-cta" href="/contact#enquiry">
           Enquire Now <ArrowUpRight size={15} />
         </Link>
         <button
@@ -210,7 +124,7 @@ export function Navigation() {
                   <Link
                     href={href}
                     onClick={close}
-                    aria-current={pathname === href ? "page" : undefined}
+                    aria-current={(href === "/" ? pathname === "/" : pathname.startsWith(href)) ? "page" : undefined}
                   >
                     {name}
                   </Link>
@@ -240,7 +154,7 @@ export function Navigation() {
               </div>
             ))}
           </nav>
-          <Link href="/contact" className="button" onClick={close}>
+          <Link href="/contact#enquiry" className="button" onClick={close}>
             Enquire Now <ArrowUpRight size={17} />
           </Link>
           <p className="muted">For healthcare & veterinary professionals.</p>

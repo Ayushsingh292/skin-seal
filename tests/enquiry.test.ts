@@ -15,6 +15,14 @@ const valid = {
 };
 test("valid professional enquiry is accepted", () =>
   assert.equal(enquirySchema.safeParse(valid).success, true));
+
+test("organization, profession and city are optional for first-time visitors", () => {
+  const { organization, profession, ...required } = valid;
+  void organization; void profession;
+  assert.equal(enquirySchema.safeParse(required).success, true);
+  assert.equal(enquirySchema.safeParse({ ...required, organization: "", profession: "", city: "" }).success, true);
+  assert.equal(enquirySchema.safeParse({ ...valid, city: "Delhi\nBcc: bad" }).success, false);
+});
 test("consent is required", () =>
   assert.equal(
     enquirySchema.safeParse({ ...valid, consent: false }).success,

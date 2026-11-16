@@ -6,7 +6,7 @@ const routes = [
   "/products",
   "/applications",
   "/why-skinseal",
-  "/clinical-experiences",
+  "/videos",
   "/resources",
   "/contact",
   "/privacy-policy",
@@ -58,6 +58,9 @@ test("every route renders with unique metadata, intact images and valid local li
         (await page.locator("link[rel=canonical]").getAttribute("href")) || "",
       ).pathname,
     ).toBe(route);
+    // Expand optional packaging before checking its lazy-loaded image.
+    for (const detail of await page.locator("details").filter({ has: page.locator("img") }).all())
+      await detail.locator("summary").click();
     // Scroll naturally: mutating loading before React hydration causes a test-induced mismatch.
     for (const image of await page.locator("img").all())
       await image.scrollIntoViewIfNeeded();
@@ -140,33 +143,22 @@ test("mobile navigation expands, traps focus, closes with Escape and follows pro
     page.getByRole("button", { name: "Open navigation", exact: true }),
   ).toBeFocused();
 });
-test("desktop product disclosure returns keyboard focus on Escape", async ({
-  page,
-}) => {
+test("desktop navigation exposes all primary pages and active product state", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
-  const toggle = page.getByRole("button", { name: "Open product navigation" });
-  await toggle.click();
-  await page.locator(".product-dropdown a").first().focus();
-  await page.keyboard.press("Escape");
-  await expect(toggle).toBeFocused();
+  await page.goto("/products/skinseal-plus");
+  const nav = page.getByRole("navigation", { name: "Main navigation" });
+  await expect(nav.getByRole("link")).toHaveCount(6);
+  await expect(nav.getByRole("link", { name: "Products", exact: true })).toHaveAttribute("aria-current", "page");
 });
-test("product filters and FAQ operate by keyboard", async ({ page }) => {
-  await page.goto("/products");
-  await page.getByRole("button", { name: "Veterinary", exact: true }).click();
-  await expect(page.locator(".product-card")).toHaveCount(1);
-  await expect(page.locator(".product-card")).toContainText(
-    "SkinSeal Veterinary Range",
-  );
-  await page.goto("/");
+
+test("detailed FAQ remains available on Why SkinSeal", async ({ page }) => {
+  await page.goto("/why-skinseal");
   const faq = page.locator(".faq-list summary").first();
   await faq.focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator(".faq-list details").first()).toHaveAttribute(
-    "open",
-    "",
-  );
+  await expect(page.locator(".faq-list details").first()).toHaveAttribute("open", "");
 });
+
 test("form validates fields and does not fake delivery when credentials are missing", async ({
   page,
 }) => {

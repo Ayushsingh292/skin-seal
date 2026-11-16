@@ -1,44 +1,18 @@
 import { test, expect } from "@playwright/test";
-test("formulation changes keep the desktop catalogue at a stable height", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
+test("all product cards are visible with accurate photography labels", async ({ page }) => {
   await page.goto("/");
-  const heights: number[] = [];
-  for (const slug of [
-    "skinseal",
-    "skinseal-plus",
-    "skinseal-adv",
-    "skinseal-adv-plus",
-  ]) {
-    await page.locator(`#formula-tab-${slug}`).click();
-    heights.push(
-      (await page.locator(".formulation-catalogue").boundingBox())!.height,
-    );
-  }
-  expect(Math.max(...heights) - Math.min(...heights)).toBeLessThanOrEqual(2);
+  await expect(page.locator(".simple-product-card")).toHaveCount(6);
+  await expect(page.locator(".simple-card-visual img")).toHaveCount(2);
+  await expect(page.locator(".simple-formulation")).toHaveCount(4);
+  const plus = page.locator(".simple-product-card").filter({ has: page.getByRole("heading", { name: "SkinSeal Plus", exact: true }) });
+  await expect(plus).toContainText("2-Octyl Cyanoacrylate");
+  await expect(plus.locator("img")).toHaveCount(0);
 });
-test("formulation catalogue switches by keyboard without presenting false variant packaging", async ({
-  page,
-}) => {
-  await page.goto("/");
-  const tabs = page.getByRole("tablist", { name: "Medical formulations" });
-  await tabs.getByRole("tab", { name: /SkinSeal Plus/ }).click();
-  await expect(
-    page.getByRole("tabpanel", { name: /SkinSeal Plus/ }),
-  ).toContainText("2-Octyl Cyanoacrylate");
-  await expect(
-    page.getByRole("tabpanel", { name: /SkinSeal Plus/ }).locator("img"),
-  ).toHaveCount(0);
-  await page.keyboard.press("ArrowRight");
-  await expect(
-    tabs.getByRole("tab", { name: /SkinSeal Adv Butyl/ }),
-  ).toHaveAttribute("aria-selected", "true");
-});
+
 test("closure journey supports keyboard navigation and product-specific guidance", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/why-skinseal");
   const tabs = page.getByRole("tablist", { name: "Closure journey" });
   await tabs.getByRole("tab", { name: /Prepare/ }).focus();
   await page.keyboard.press("End");
@@ -63,7 +37,7 @@ test("resource search filters real document entries and provides approved downlo
     "/documents/skinseal-insert.pdf",
   );
 });
-test("wide desktop navigation is horizontal and product menu describes formulations", async ({
+test("wide desktop navigation is horizontal with direct product access", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -74,6 +48,6 @@ test("wide desktop navigation is horizontal and product menu describes formulati
   await expect(
     page.getByRole("button", { name: "Open navigation", exact: true }),
   ).toBeHidden();
-  await page.getByRole("button", { name: "Open product navigation" }).click();
-  await expect(page.locator(".product-dropdown")).toContainText("2-Octyl");
+  await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Products", exact: true }).click();
+  await expect(page.locator(".simple-product-card")).toHaveCount(6);
 });

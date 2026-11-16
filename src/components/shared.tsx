@@ -91,32 +91,27 @@ export function SectionHeading({
 }
 export function ProductCard({ product: p }: { product: Product }) {
   return (
-    <article className={`product-card catalogue-row catalogue-${p.slug}`}>
-      <span className="catalogue-row-number">0{products.indexOf(p) + 1}</span>
-      <div className="catalogue-row-title">
-        <span>
-          {p.category} / {p.label}
-        </span>
-        <h3>
-          <Link href={`/products/${p.slug}`}>{p.name}</Link>
-        </h3>
-        <p className="catalogue-description">{p.description}</p>
+    <article className="product-card simple-product-card">
+      <div className="simple-card-visual">
+        {p.image ? <Image src={p.image} alt={p.imageNote} width={1193} height={595} sizes="(max-width: 639px) 85vw, (max-width: 1023px) 42vw, 28vw" /> : <div className="simple-formulation"><span>{p.category} range</span><strong>{p.label}</strong><small>Formulation overview · pack photo on request</small></div>}
       </div>
-      <p className="catalogue-row-composition">{p.composition}</p>
-      <span className="catalogue-row-sizes">{p.sizes.join(" / ")}</span>
-      <Link
-        className="catalogue-row-link"
-        href={`/products/${p.slug}`}
-        aria-label={`View Details: ${p.name}`}
-      >
-        View Details <ArrowUpRight size={20} />
-      </Link>
+      <div className="simple-card-copy">
+        <span className="simple-category">{p.category}</span>
+        <h3><Link href={`/products/${p.slug}`}>{p.name}</Link></h3>
+        <p className="simple-composition">{p.composition}</p>
+        <p>{p.description}</p>
+        <p className="simple-sizes">Listed sizes: {p.sizes.join(" / ")}</p>
+        <div className="simple-card-actions">
+          <Link className="text-link" href={`/products/${p.slug}`} aria-label={`View Details: ${p.name}`}>View Details <ArrowUpRight size={16} /></Link>
+          <Link className="simple-enquire" href={`/contact?product=${p.slug}#enquiry`} aria-label={`Enquire: ${p.name}`}>Enquire</Link>
+        </div>
+      </div>
     </article>
   );
 }
 export function ProductGrid({ items = products }: { items?: Product[] }) {
   return (
-    <div className="product-grid catalogue-index">
+    <div className="product-grid simple-product-grid">
       {items.map((p) => (
         <ProductCard key={p.slug} product={p} />
       ))}
@@ -134,39 +129,23 @@ export function ProductArt({
 }
 export function ApplicationGrid({ limit }: { limit?: number }) {
   return (
-    <div className="application-grid">
-      {applications.slice(0, limit).map((a, i) => (
+    <div className="simple-application-grid">
+      {applications.slice(0, limit).map((a) => (
         <Link
           href={`/applications#${a.slug}`}
-          className="application-card"
+          className="simple-application-card"
           key={a.slug}
         >
-          <Image
+          <div className="simple-application-image"><Image
             src={`/images/applications/${a.image}.webp`}
             alt={a.alt}
             fill
             style={{ objectPosition: a.position }}
-            sizes={
-              i === 0
-                ? "(max-width:760px) 90vw, 50vw"
-                : i >= 5
-                  ? "(max-width:760px) 45vw, 50vw"
-                  : "(max-width:760px) 45vw, 25vw"
-            }
-          />
-          <div className="application-overlay">
-            <span className="application-number">
-              0{i + 1} / AREA OF PRACTICE
-            </span>
+            sizes="(max-width: 639px) 90vw, (max-width: 1023px) 45vw, 23vw"
+          /></div>
+          <div className="simple-application-copy">
             <h3>{a.name}</h3>
-            <ArrowUpRight size={24} />
-            {i === 0 && (
-              <p>
-                Selected superficial skin closures.
-                <br />
-                Professional assessment, always.
-              </p>
-            )}
+            <span>View Details <ArrowUpRight size={16} /></span>
           </div>
         </Link>
       ))}
@@ -202,24 +181,19 @@ export function CTA() {
     <section className="cta-section">
       <div className="container cta-inner">
         <div>
-          <Eyebrow>A conversation worth starting</Eyebrow>
-          <h2>
-            Your practice.
-            <br />
-            <span>The right SkinSeal solution.</span>
-          </h2>
+          <Eyebrow>Contact & enquiry</Eyebrow>
+          <h2>Interested in SkinSeal?</h2>
         </div>
         <div className="cta-copy">
           <p>
-            Product information, availability or a closer look at the range. Our
-            team is here to help.
+            Contact our team for product information, availability, and professional enquiries.
           </p>
           <div className="button-row">
-            <Link className="button white" href="/contact">
-              Contact Us <ArrowUpRight size={20} />
+            <Link className="button white" href="/contact#enquiry">
+              Enquire Now <ArrowUpRight size={20} />
             </Link>
-            <Link className="text-link" href="/products">
-              Explore Products <ArrowRight size={20} />
+            <Link className="text-link" href="/contact">
+              Contact Us <ArrowRight size={20} />
             </Link>
           </div>
         </div>
@@ -272,6 +246,8 @@ export function Footer() {
           </div>
           <div>
             <h3>Explore</h3>
+            <Link href="/videos">Videos & Demonstrations</Link>
+            <Link href="/why-skinseal">Why SkinSeal</Link>
             {navigation
               .filter(([name]) => name !== "Home" && name !== "Products")
               .map(([name, href]) => (
