@@ -103,7 +103,7 @@ export function ProductCard({ product: p }: { product: Product }) {
         <p className="simple-sizes">Listed sizes: {p.sizes.join(" / ")}</p>
         <div className="simple-card-actions">
           <Link className="text-link" href={`/products/${p.slug}`} aria-label={`View Details: ${p.name}`}>View Details <ArrowUpRight size={16} /></Link>
-          <Link className="simple-enquire" href={`/contact?product=${p.slug}#enquiry`} aria-label={`Enquire: ${p.name}`}>Enquire</Link>
+          <Link className="simple-enquire" href={`/contact?product=${p.slug}#enquiry`} aria-label={`Enquire Now: ${p.name}`}>Enquire Now</Link>
         </div>
       </div>
     </article>
@@ -195,6 +195,10 @@ export function CTA() {
             <Link className="text-link" href="/contact">
               Contact Us <ArrowRight size={20} />
             </Link>
+          </div>
+          <div className="cta-contact-details">
+            <a href={`tel:${site.tel}`}><Phone size={15} aria-hidden="true" />{site.phone}</a>
+            <a href={`mailto:${site.email}`}><Mail size={15} aria-hidden="true" />{site.email}</a>
           </div>
         </div>
         <span className="cta-plus" aria-hidden="true">

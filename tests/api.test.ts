@@ -91,6 +91,10 @@ test("provider acceptance, rejection and timeout are represented honestly", asyn
     assert.equal((await POST(request(valid, "provider-test"))).status, 502);
     globalThis.fetch = async () => Response.json({});
     assert.equal((await POST(request(valid, "provider-test"))).status, 502);
+    for (const id of ["", "   "]) {
+      globalThis.fetch = async () => Response.json({ id });
+      assert.equal((await POST(request(valid, "invalid-provider-id"))).status, 502);
+    }
     globalThis.fetch = async () => {
       throw new Error("timeout");
     };

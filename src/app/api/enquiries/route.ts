@@ -117,7 +117,7 @@ export async function POST(request: Request) {
         502,
       );
     const delivery = await result.json();
-    if (typeof delivery.id !== "string")
+    if (typeof delivery.id !== "string" || !delivery.id.trim())
       return reply(
         {
           error: "Delivery could not be confirmed. Please contact us directly.",

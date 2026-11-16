@@ -17,6 +17,11 @@ export function Navigation() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const background = Array.from(document.querySelectorAll<HTMLElement>(
+      "main, footer, .skip-link, .nav-utility, .nav-wrap .brand, .nav-wrap .nav-cta",
+    ));
+    const previousInert = background.map(element => element.inert);
+    background.forEach(element => { element.inert = true; });
     panel.current?.querySelector<HTMLElement>("a")?.focus();
     function keyboard(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -64,6 +69,7 @@ export function Navigation() {
     query.addEventListener("change", resize);
     return () => {
       document.body.style.overflow = previous;
+      background.forEach((element, index) => { element.inert = previousInert[index]; });
       document.removeEventListener("keydown", keyboard);
       query.removeEventListener("change", resize);
     };
