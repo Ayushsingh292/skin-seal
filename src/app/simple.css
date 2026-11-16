@@ -64,6 +64,8 @@
 .cta-section h2 { font-size: clamp(30px, 3.2vw, 46px); }
 .cta-section .eyebrow { margin-bottom: 16px; }
 .cta-section .cta-plus { display: none; }
+.cta-contact-details { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; }
+.cta-contact-details a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #fff; font-size: 12px; overflow-wrap: anywhere; }
 .footer-signature { display: none; }
 .site-footer { padding-top: 48px; }
 .simple-comparison { margin-top: 56px; scroll-margin-top: 110px; }
@@ -101,7 +103,7 @@
 .simple-detail-actions { margin-top: 28px; }
 .simple-document-request { margin-top: 32px; }
 .simple-document-request h2 { font-size: 26px; }
-.detail-copy > .text-link { margin-top: 18px; }
+.detail-copy > .text-link { display: flex; width: fit-content; margin-top: 18px; min-height: 44px; }
 @media (min-width: 640px) {
   .product-grid.simple-product-grid, .simple-benefits, .simple-application-grid, .application-details { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }

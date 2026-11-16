@@ -25,7 +25,7 @@ export default function Home() {
           <p className="simple-audience">For medical, dental &amp; veterinary professionals.</p>
         </div>
         <figure className="simple-hero-visual">
-          <Image src="/images/products/skinseal.webp" alt="Authentic SkinSeal N-Butyl-2-Cyanoacrylate 0.25 mL carton" width={1193} height={595} sizes="(max-width: 767px) 90vw, 45vw" preload />
+          <Image src="/images/products/skinseal.webp" alt="Authentic SkinSeal N-Butyl-2-Cyanoacrylate 0.25 mL carton" width={1193} height={595} sizes="(max-width: 767px) calc(100vw - 76px), (max-width: 1440px) 42vw, 590px" loading="eager" fetchPriority="high" />
           <Image className="simple-applicator" src="/images/products/original-applicator.webp" alt="Original SkinSeal applicator from the company catalogue" width={2419} height={451} sizes="(max-width: 767px) 75vw, 35vw" />
           <figcaption>Original SkinSeal · 0.25 mL pack shown</figcaption>
         </figure>

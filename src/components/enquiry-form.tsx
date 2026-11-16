@@ -28,18 +28,26 @@ export function EnquiryForm({
   });
   async function submit(values: EnquiryInput) {
     setFeedback(null);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
       const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
+        signal: controller.signal,
       });
-      const result = await response.json();
+      const result: unknown = await response.json().catch(() => null);
+      const payload = result && typeof result === "object"
+        ? result as Record<string, unknown>
+        : {};
       if (!response.ok)
         throw new Error(
-          result.error ||
-            "Your enquiry could not be delivered. Please email or call us.",
+          typeof payload.error === "string" ? payload.error :
+            "Your enquiry could not be delivered. Please try again or contact us directly.",
         );
+      if (payload.message !== "Enquiry delivered.")
+        throw new Error("Your enquiry could not be confirmed. Please try again or contact us directly.");
       setFeedback({
         ok: true,
         text: "Your enquiry has been delivered to the SkinSeal team. Thank you for getting in touch.",
@@ -49,10 +57,14 @@ export function EnquiryForm({
       setFeedback({
         ok: false,
         text:
-          e instanceof Error
+          controller.signal.aborted
+            ? "The request took too long. Please try again or contact us directly."
+            : e instanceof Error && !(e instanceof TypeError)
             ? e.message
             : "Unable to connect. Please try again or contact us directly.",
       });
+    } finally {
+      window.clearTimeout(timeout);
     }
   }
   const err = (name: keyof EnquiryInput) =>
@@ -66,7 +78,7 @@ export function EnquiryForm({
     "aria-describedby": errors[name] ? `${name}-error` : undefined,
   });
   return (
-    <form id="enquiry" noValidate onSubmit={handleSubmit(submit)} className="enquiry-form">
+    <form id="enquiry" noValidate aria-busy={isSubmitting} onSubmit={handleSubmit(submit)} className="enquiry-form">
       <div className="form-heading">
         <h2>Send a Product Enquiry</h2>
         <p>
@@ -79,6 +91,7 @@ export function EnquiryForm({
           <label htmlFor="name">Full name *</label>
           <input
             id="name"
+            required
             autoComplete="name"
             maxLength={100}
             {...register("name")}
@@ -90,6 +103,7 @@ export function EnquiryForm({
           <label htmlFor="email">Email address *</label>
           <input
             id="email"
+            required
             type="email"
             autoComplete="email"
             maxLength={254}
@@ -102,6 +116,7 @@ export function EnquiryForm({
           <label htmlFor="phone">Phone number *</label>
           <input
             id="phone"
+            required
             type="tel"
             autoComplete="tel"
             maxLength={25}
@@ -146,7 +161,7 @@ export function EnquiryForm({
         </div>
         <div className="field">
           <label htmlFor="product">Product of interest *</label>
-          <select id="product" {...register("product")} {...attrs("product")}>
+          <select id="product" required {...register("product")} {...attrs("product")}>
             <option value="general">General enquiry</option>
             {products.map((p) => (
               <option key={p.slug} value={p.slug}>
@@ -165,6 +180,7 @@ export function EnquiryForm({
           <label htmlFor="message">Your message *</label>
           <textarea
             id="message"
+            required
             rows={5}
             maxLength={5000}
             {...register("message")}
@@ -186,6 +202,7 @@ export function EnquiryForm({
           <input
             type="checkbox"
             id="consent"
+            required
             {...register("consent")}
             {...attrs("consent")}
           />
