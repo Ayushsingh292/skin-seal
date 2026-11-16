@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CTA, PageHero } from "@/components/shared";
 import { ResourceLibrary } from "@/components/resource-library";
 import { pageMetadata } from "@/lib/metadata";
@@ -13,9 +14,9 @@ export default function Resources() {
     <>
       <PageHero
         label="Resource centre"
-        title="Better information. Informed decisions."
+        title="Product Brochures & Instructions"
         description="Explore the company-supplied SkinSeal document collection. View a brochure, download the product insert, or find background for your next product enquiry."
-      />
+      ><Link className="text-link" href="/videos">Videos & Demonstrations <ArrowUpRight size={17} /></Link></PageHero>
       <section className="section">
         <div className="container">
           <article className="catalogue-feature">
@@ -36,7 +37,7 @@ export default function Resources() {
             </a>
             <div>
               <p className="eyebrow">Featured resource / 6 pages</p>
-              <h2>A closer look at SkinSeal.</h2>
+              <h2>SkinSeal Product Catalogue</h2>
               <p>
                 The original company catalogue brings product artwork and
                 product information together in one downloadable reference.
@@ -72,6 +73,11 @@ export default function Resources() {
             </p>
           </div>
           <ResourceLibrary />
+          <div className="info-panel simple-document-request">
+            <h2>Need a Product Datasheet?</h2>
+            <p>Ask our team for current datasheets and variant-specific instructions, including dental and veterinary documentation.</p>
+            <Link className="text-link" href="/contact?type=documentation#enquiry">Request Document <ArrowUpRight size={17} /></Link>
+          </div>
           <p className="section-note">
             Listed file sizes refer to the supplied source files. Resource
             availability does not replace professional assessment or the

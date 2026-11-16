@@ -18,7 +18,7 @@ export default function Why() {
     <>
       <PageHero
         label="Why SkinSeal"
-        title="Designed around the details of care."
+        title="Why Choose SkinSeal?"
         description="Explore the topical approach and the product family, with clinical suitability and the current Instructions for Use guiding every selection."
       />
       <section className="section">

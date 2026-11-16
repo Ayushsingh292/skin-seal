@@ -66,9 +66,9 @@ export function EnquiryForm({
     "aria-describedby": errors[name] ? `${name}-error` : undefined,
   });
   return (
-    <form noValidate onSubmit={handleSubmit(submit)} className="enquiry-form">
+    <form id="enquiry" noValidate onSubmit={handleSubmit(submit)} className="enquiry-form">
       <div className="form-heading">
-        <h2>Start a conversation.</h2>
+        <h2>Send a Product Enquiry</h2>
         <p>
           Fields marked * are required. Please do not include patient
           information.
@@ -111,7 +111,7 @@ export function EnquiryForm({
           {err("phone")}
         </div>
         <div className="field">
-          <label htmlFor="organization">Organization *</label>
+          <label htmlFor="organization">Organization (optional)</label>
           <input
             id="organization"
             autoComplete="organization"
@@ -122,14 +122,14 @@ export function EnquiryForm({
           {err("organization")}
         </div>
         <div className="field">
-          <label htmlFor="profession">Profession / enquiry type *</label>
+          <label htmlFor="profession">Profession / enquiry type (optional)</label>
           <select
             id="profession"
             {...register("profession")}
             {...attrs("profession")}
             defaultValue=""
           >
-            <option value="" disabled>
+            <option value="">
               Select an option
             </option>
             {[
@@ -155,6 +155,11 @@ export function EnquiryForm({
             ))}
           </select>
           {err("product")}
+        </div>
+        <div className="field full">
+          <label htmlFor="city">City (optional)</label>
+          <input id="city" autoComplete="address-level2" maxLength={100} {...register("city")} {...attrs("city")} />
+          {err("city")}
         </div>
         <div className="field full">
           <label htmlFor="message">Your message *</label>

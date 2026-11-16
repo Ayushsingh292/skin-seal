@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy-policy",
     "/terms",
     "/disclaimer",
+    "/videos",
+    "/why-skinseal",
   ].map((path) => ({
     url: `${site.url}${path}`,
     changeFrequency: "monthly" as const,

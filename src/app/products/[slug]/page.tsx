@@ -1,277 +1,74 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, Check, FileText, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { findProduct, products } from "@/data/products";
-import {
-  CTA,
-  Eyebrow,
-  MedicalNotice,
-  ProductGrid,
-  ProductArt,
-  SectionHeading,
-} from "@/components/shared";
-import { pageMetadata } from "@/lib/metadata";
+import { Eyebrow, MedicalNotice, ProductArt, SectionHeading } from "@/components/shared";
 import { VideoGallery } from "@/components/video-gallery";
 import { ResourceRows } from "@/components/resource-library";
 import { documents, publishedVideos } from "@/data/media";
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateStaticParams() { return products.map(p => ({ slug: p.slug })); }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const p = findProduct(slug);
-  return p
-    ? pageMetadata(
-        p.name,
-        `${p.composition}. ${p.description}`,
-        `/products/${slug}`,
-      )
-    : {};
+  const product = findProduct(slug);
+  return product ? pageMetadata(product.name, `${product.composition}. ${product.description}`, `/products/${slug}`) : {};
 }
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = findProduct(slug);
   if (!p) notFound();
-  return (
-    <>
-      <section className="product-detail-hero">
-        <div className="container">
-          <div className="breadcrumb">
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/products">Products</Link>
-            <span>/</span>
-            {p.name}
-          </div>
-          <div className="detail-grid">
-            <div className="detail-visual">
-              <ProductArt product={p} priority />
-            </div>
-            <div className="detail-copy">
-              <Eyebrow>{p.label}</Eyebrow>
-              <h1>{p.name}</h1>
-              <p className="detail-composition">{p.composition}</p>
-              <p>{p.description}</p>
-              <div className="size-options">
-                <span>Listed sizes</span>
-                {p.sizes.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
-              </div>
-              <p className="small-copy muted">
-                Confirm current availability and the applicable product insert
-                with our team.
-              </p>
-              <Link href={`/contact?product=${p.slug}`} className="button">
-                Enquire About{" "}
-                {p.category === "Dental"
-                  ? "Dental Range"
-                  : p.name.replace(" Range", "")}{" "}
-                <ArrowUpRight size={18} />
-              </Link>
-              <p className="detail-professional">
-                <ShieldCheck size={16} />
-                For {p.category === "Veterinary"
-                  ? "veterinary"
-                  : "healthcare"}{" "}
-                professional use.
-              </p>
-            </div>
+  const original = p.slug === "skinseal";
+  return <>
+    <section className="product-detail-hero">
+      <div className="container">
+        <div className="breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/products">Products</Link><span>/</span>{p.name}</div>
+        <div className="detail-grid">
+          <div className="detail-visual"><ProductArt product={p} priority /></div>
+          <div className="detail-copy">
+            <Eyebrow>{p.category} range</Eyebrow>
+            <h1>{p.name}</h1>
+            <p className="detail-composition">{p.composition}</p>
+            <p>{p.description}</p>
+            <div className="size-options"><span>Listed sizes</span>{p.sizes.map(size => <span key={size}>{size}</span>)}</div>
+            <p className="small-copy muted">Confirm current availability and the exact variant’s Instructions for Use with our team.</p>
+            <Link className="button" href={`/contact?product=${p.slug}#enquiry`}>Enquire About {p.name} <ArrowUpRight size={18} /></Link>
+            <Link className="text-link" href="/products#compare">Compare Formulations <ArrowUpRight size={16} /></Link>
           </div>
         </div>
-      </section>
-      <section className="section">
-        <div className="container product-info-grid">
-          <div>
-            <Eyebrow>Product perspective</Eyebrow>
-            <h2>
-              Understand the formulation.
-              <br />
-              Choose with confidence.
-            </h2>
-            <p className="content-paragraph">
-              Every clinical setting is different. Selection of {p.name} should
-              be based on professional assessment and the exact product’s
-              approved indications, precautions and Instructions for Use.
-            </p>
-            <h3>Intended areas of practice</h3>
-            <ul className="check-list">
-              {p.applications.map((a) => (
-                <li key={a}>
-                  <Check size={17} />
-                  {a}
-                </li>
-              ))}
-            </ul>
-            <h3>Before selecting a product</h3>
-            <p className="content-paragraph">
-              Review the variant, pack label, intended use, contraindications,
-              storage requirements and aftercare guidance. Do not assume the
-              instructions for one SkinSeal formulation apply to every other
-              variant.
-            </p>
-          </div>
-          <aside className="product-facts">
-            <h3>At a glance</h3>
-            <dl>
-              <dt>Product family</dt>
-              <dd>{p.name}</dd>
-              <dt>Composition / variants</dt>
-              <dd>{p.composition}</dd>
-              <dt>Listed pack sizes</dt>
-              <dd>{p.sizes.join(" · ")}</dd>
-              <dt>Practice</dt>
-              <dd>{p.category}</dd>
-              <dt>Information source</dt>
-              <dd>Official SkinSeal range and supplied product materials</dd>
-            </dl>
-            <Link
-              className="text-link"
-              href={`/contact?product=${p.slug}&resource=insert`}
-            >
-              <FileText size={18} />
-              Request product documentation
-            </Link>
-          </aside>
+      </div>
+    </section>
+    <section className="section">
+      <div className="container simple-detail-info">
+        <div>
+          <h2>Product Information</h2>
+          <ul className="check-list">
+            <li><Check size={17} />{p.composition}</li>
+            <li><Check size={17} />{original ? "Sterile, single-use topical adhesive with a dedicated applicator." : `${p.category} product family. Request the exact variant’s current insert for features and precautions.`}</li>
+            <li><Check size={17} />Available in listed sizes: {p.sizes.join(" / ")}</li>
+          </ul>
+          {original && <details className="simple-pack-details"><summary>View reverse packaging</summary><Image src="/images/products/skinseal-back.webp" alt="Reverse of the supplied original SkinSeal packaging" width={1244} height={555} sizes="(max-width: 767px) 90vw, 45vw" /></details>}
         </div>
-      </section>
-      <section className="section soft-bg">
-        <div className="container">
-          <SectionHeading
-            label="Product gallery"
-            title={
-              p.slug === "skinseal" || p.category === "Veterinary"
-                ? "The details, in view."
-                : "A distinct formulation. A clear identity."
-            }
-            description={
-              p.slug === "skinseal" || p.category === "Veterinary"
-                ? p.imageNote
-                : "A product-specific formulation presentation. Request exact variant photography and documentation from our team."
-            }
-          />
-          <div className="packaging-gallery">
-            {p.slug === "skinseal" || p.category === "Veterinary" ? (
-              <figure>
-                <Image
-                  src={p.image!}
-                  alt={p.imageNote}
-                  width={1193}
-                  height={595}
-                  sizes="(max-width: 800px) 90vw, 45vw"
-                />
-                <figcaption>
-                  {p.category === "Veterinary"
-                    ? "SkinSeal Vet — front of pack"
-                    : "SkinSeal — family packaging reference"}
-                </figcaption>
-              </figure>
-            ) : (
-              <div className="formulation-gallery-note">
-                <span>SKINSEAL / FORMULATION PROFILE</span>
-                <h3>{p.name}</h3>
-                <p>{p.composition}</p>
-                <div>{p.sizes.join(" · ")}</div>
-                <Link className="text-link" href={`/contact?product=${p.slug}`}>
-                  Request exact product information <ArrowUpRight size={19} />
-                </Link>
-              </div>
-            )}
-            {p.slug === "skinseal" && (
-              <figure>
-                <Image
-                  src="/images/products/skinseal-back.webp"
-                  alt="Original SkinSeal reverse packaging with product information"
-                  width={1244}
-                  height={555}
-                  sizes="(max-width: 800px) 90vw, 45vw"
-                />
-                <figcaption>
-                  SkinSeal — reverse of supplied pack artwork
-                </figcaption>
-              </figure>
-            )}
-          </div>
+        <div>
+          <h2>Relevant Applications</h2>
+          <ul className="check-list">{p.applications.map(application => <li key={application}><Check size={17} />{application}</li>)}</ul>
+          <Link className="text-link" href={`/applications${p.category === "Dental" ? "#dental" : p.category === "Veterinary" ? "#veterinary" : "#surgical"}`}>Explore Applications <ArrowUpRight size={16} /></Link>
         </div>
-      </section>
-      <section className="section">
-        <div className="container support-grid">
-          <div>
-            <Eyebrow>Professional learning</Eyebrow>
-            <h2>Get the right information.</h2>
-            <p>
-              Request current product documentation and ask about demonstration
-              materials for {p.name}. Our team can help identify the relevant
-              information for your enquiry.
-            </p>
-            <Link
-              className="text-link"
-              href={`/contact?product=${p.slug}&type=demonstration`}
-            >
-              Request a demonstration <ArrowUpRight size={18} />
-            </Link>
-          </div>
-          <div className="info-panel">
-            <h3>Documentation & related videos</h3>
-            <p>
-              {p.slug === "skinseal"
-                ? "Explore the original SkinSeal catalogue, insert and company-supplied product guides below."
-                : p.slug === "skinseal-veterinary"
-                  ? "Watch the veterinary product video below. Ask our team for the current veterinary-specific insert."
-                  : "The shared resource library includes original SkinSeal materials. Request the current insert for this exact formulation; original-product instructions must not be assumed to apply."}
-            </p>
-            <Link
-              href={`/contact?product=${p.slug}`}
-              className="button outline"
-            >
-              Ask the SkinSeal Team <ArrowUpRight size={17} />
-            </Link>
-          </div>
+      </div>
+    </section>
+    {publishedVideos.some(v => v.product === p.slug) && <section className="section product-films"><div className="container"><VideoGallery product={p.slug} /></div></section>}
+    <section className="section soft-bg">
+      <div className="container">
+        <SectionHeading label="Product support" title="Documentation & Demonstrations" description={original ? "Company-supplied references for the original SkinSeal product. Confirm the current revision before use." : "Request documentation for this exact variant. Original SkinSeal instructions must not be assumed to apply to every product."} />
+        {original && <ResourceRows items={documents.filter(d => ["catalogue", "insert", "application"].includes(d.id))} />}
+        <div className="button-row simple-detail-actions">
+          <Link className="button" href={`/contact?product=${p.slug}&resource=insert#enquiry`}>Request Product Documentation <ArrowUpRight size={17} /></Link>
+          <Link className="text-link" href={`/contact?product=${p.slug}&type=demonstration#enquiry`}>Request a Demonstration <ArrowUpRight size={17} /></Link>
+          {original && <Link className="text-link" href="/resources">All Resources <ArrowUpRight size={17} /></Link>}
         </div>
-      </section>
-      {publishedVideos.some((video) => video.product === p.slug) && (
-        <section className="section product-films">
-          <div className="container">
-            <VideoGallery product={p.slug} />
-          </div>
-        </section>
-      )}
-      {p.slug === "skinseal" && (
-        <section className="section">
-          <div className="container">
-            <SectionHeading
-              label="Original SkinSeal / Documents"
-              title="Product references, at hand."
-              description="Company-supplied PDFs. Confirm the current revision for your exact product before use."
-            />
-            <ResourceRows items={documents} />
-          </div>
-        </section>
-      )}
-      <section className="section soft-bg">
-        <div className="container">
-          <SectionHeading
-            label="Explore the portfolio"
-            title="Other SkinSeal solutions."
-            href="/products"
-            link="All products"
-          />
-          <ProductGrid
-            items={products.filter((x) => x.slug !== slug).slice(0, 3)}
-          />
-          <MedicalNotice />
-        </div>
-      </section>
-      <CTA />
-    </>
-  );
+        <MedicalNotice />
+      </div>
+    </section>
+  </>;
 }

@@ -10,11 +10,9 @@ export const site = {
 };
 export const navigation = [
   ["Home", "/"],
-  ["About", "/about"],
   ["Products", "/products"],
   ["Applications", "/applications"],
-  ["Why SkinSeal", "/why-skinseal"],
-  ["Clinical Experiences", "/clinical-experiences"],
+  ["About Us", "/about"],
   ["Resources", "/resources"],
   ["Contact", "/contact"],
 ] as const;
